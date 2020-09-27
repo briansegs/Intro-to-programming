@@ -4,17 +4,18 @@
 			<title>📚Learning programming📚</title>
     </head>
     <body>
-			<nav>
+			<nav id="navigation">
 				<lable for="navigation">Navigation</lable>
 				<ul>
 					<a href="#helpful links"><li>Helpful links</li></a>
-					<a href=""><li></li></a>
+					<a href="#notes"><li>Notes</li></a>
 					<a href=""><li></li></a>
 				</ul>
 			</nav>
 			<header>
 				<figure>
-					<img src="https://avatars0.githubusercontent.com/u/69824235?s=460&u=aaa3c194316da0b798d51992f8c641cfb7a8603f&v=4" length="200" height="200" alt="Pic of me"> 
+					<a href="https://www.youtube.com/watch?v=oHg5SJYRHA0"><img src="https://avatars0.githubusercontent.com/
+						u/69824235?s=460&u=aaa3c194316da0b798d51992f8c641cfb7a8603f&v=4" length="225" height="225" alt="Pic of me"></a>
 					<figcaption>😊</figcaption>
 				</figure>
 				<h1>Intoduction to programming notes</h1>
@@ -25,27 +26,160 @@
 					<ul>
 						<a href="https://htmlcheatsheet.com/" target="_blank"><li>HTML Cheatsheet</li></a>
 						<a href="https://developer.mozilla.org/en-US/" target="_blank"><li>Mozilla Developer Network</li></a>
+						<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements#Elements" target="_blank"><li>Block-level elements (reference)</li></a>
+						<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements#Elements" target="_blank"><li>Inline elements (reference)</li></a>
+						<a href="https://picsum.photos/" target="_blank"><li>Lorem Picsum (image placeholder)</li></a>
 						<a href=""><li></li></a>
 					</ul>
 				</section>
-				<section id="notes">
-					<article>
-						<h2>Notes:</h2>
-						<h4>Markup</h4>
-						<p>Markup is used to tell a browser what to do with the text in an HTML document. 
-							We can use keywords as tags to create elements that will have an outcome based on 
-							what the keyword does. Like (strong) makes things <strong>bold</strong> and (em) 
-							makes them <em>italic</em>.</p>
-						<h4>Lots of elements</h4>
-						<p>There are a lot of elements to try out and use. They can do things like <mark>highlight</mark> words, move them <sub>down</sub>, and move them <sup>up</sup>.</p>
-					</article>
-				</section>
+				<article id="notes" class="notes"><!-- Notes start here -->
+					<header>
+						<h2>Notes</h2>
+					</header>
+					<section class="class_notes">
+						<article class="markup"><!-- Markup notes -->
+							<header>
+								<h3>Markup:</h3>
+							</header>	
+							<section class="markup_example">
+								<p>Markup is used to tell a browser what to do with the text in an HTML document. 
+									We can use keywords as tags to create elements that will have an outcome based on 
+									what the keyword does. Like (strong) makes things <strong>bold</strong> and (em) 
+									makes them <em>italic</em>.</p>
+							</section>
+							<footer>
+								<p>Can't wait to play with more elements!</p>
+							</footer>
+						</article>
+						<br>
+						<article class="elements"><!-- elements notes -->
+							<header>
+								<h3>Lots of elements:</h3>
+							</header>
+							<section class="elements_example">
+							<p>There are a lot of elements to try out and use. They can do things like <mark>highlight</mark> words, move them <sub>down</sub>, and move them <sup>up</sup>.</p>
+							</section>
+							<footer>
+								<p>Many more to learn...</p>
+							</footer>
+						</article>
+						<br>
+						<article class="headings"><!-- headings notes -->
+							<header>
+								<h3>Heading practice:</h>
+							</header>
+							<section class="headings_example">
+								<article class="example1"><!-- example 1  -->
+									<p><h4>example 1:</h4></p>
+									<h1>My HTML Notes</h1>
+									<p>This page is a collection of my awesome notes about HTML!</p>
+									<h2>The Web</h2>
+									<p>The Web (or World Wide Web) is a collection of documents and other files. Most of the documents are made using Hypertext Markup Language (HTML).</p>
+									<h2>What is HTML?</h2>
+									<p>HTML stands for Hypertext Markup Language. It's used to define the structure or layout of a web page.</p>
+								</article>
+								<article class="example2"><!-- example 2  -->
+								<p><h4>example 2:</h4></p>
+								<h1>My chemistry notes</h1>
+								<p><strong>Molecule name:</strong> <em>Sulfur hexafluoride<em></p> 
+  							<p><strong>Molecular formula:</strong> C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></p>
+								<p><strong>Note:</strong> This gas has a much higher density than air. Basically the opposite of helium. <mark>Crazy!</mark></p>
+							  </article>	
+							</section>	
+							<footer>
+								<p>It is useful to get some experience using headings and seeing how they work.</p>
+							</footer>
+						</article>
+						<br>
+						<article class="lists_and_closing_tags"><!-- Lists and closing tag notes -->
+							<header>
+								<h3>Lists and closing tags:</h3>
+							</header>
+							<section class="list_notes">
+								<p>A closing tag is optional for each list item, but not for the list as a whole. We must be sure to close the list as a whole. 
+									If we leave off, the browser will not know when our list ends. It will simply treat everything that comes after that point as part of the list.</p>
+							</section>
+							<section class="examples">
+								<header>
+									<h4>Random things (examples)</h4>
+								</header>
+								<ul>
+									<li>Cheese
+										<ol>
+											<li>dog</li>
+											<li>air</li>
+											<li>plant</li>
+										</ol>
+									<li>cream</li>
+									<li>salid</li> 
+									</li>
+								</ul>
+								<ul>
+									<li>Mammals
+										<ol>
+											<li>Raccoons</li>
+											<li>Gorillas</li>
+										</ol>
+									<li>Reptiles
+										<ol>
+											<li>Iguanas</li>
+											<li>Cobras</li>
+										</ol>
+									<li>Birds
+										<ol>
+											<li>Ostriches</li>
+											<li>Ravens</li>
+										</ol>
+								</ul>
+							</section>
+							<footer>
+								<p>I can see why you would leave off closing tags if they are optional. 
+									I'm going to leave them on for now and see how i feel about them later 
+									after i gain more experience.</p>
+							</footer>
+						</article>
+						<br>
+						<article class="links"><!-- Link notes -->
+							<header>
+								<h3>Links and the "a" tag:</h3>
+							</header>
+							<section class="link_notes">
+								<p>Check out this link to my <a href="http://briansegers.com/" target="_blank">3D art site</a> </p>
+							</section>
+							<footer>
+								<p>Lnking is such a useful tool. Easy too.</p>
+							</footer>
+						</article>
+						<br>
+						<article class="images"><!-- Image notes -->
+							<header>
+								<h3>Images:</h3>
+							</header>
+							<section class="image_notes">
+								<p>Check out my image at the <a href="#navigation">top</a>. I even wrapped it in a link!</p>
+							</section>
+							<footer>
+								<p>Images are fun to work with. It's great to see the different ways you can work with them.</p>
+							</footer>
+						</article>
+						<br>
+						<article class=""><!-- notes -->
+							<header>
+								<h3></h3>
+							</header>
+							<section class="">
+								<p></p>
+							</section>
+							<footer>
+								<p></p>
+							</footer>
+						</article>
+						<br>
+						
+						
+				</article>
 				<br>
-				<section id="">
-					<article>
-
-					</article>
-				</section>
+				
 			</main>
 			<br>
 			<aside>
