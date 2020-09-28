@@ -5,8 +5,10 @@
 			<style>
 				article h1 {font-size:32px; margin-top:21.44px; margin-bottom:21.44px;}
 				strong {color:#00006B;}
-				body {background-color: #F7F8FF; font-family: Rubik, Arial;}
+				body {background-color: #F7F8FF; font-family: Rubik, Arial;  }
+				.main {width: 80%;}
 				.footer {position: fixed; left: 0; bottom: 0; width: 100%; text-align: center; background-color: #F7F8FF; }
+				em {color:#E80055}
 
 			</style>
     </head>
@@ -26,7 +28,7 @@
 				</figure>
 				<h1>Introduction to programming notes</h1>
 			</header>
-			<main>
+			<main class="main">
 				<section id="helpful_links">
 					<h3>Helpful Links</h3>
 					<ul>
@@ -35,7 +37,8 @@
 					  <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements#Elements" target="_blank">Block-level elements (reference)</a></li>
 						<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements#Elements" target="_blank">Inline elements (reference)</a></li>
 						<li><a href="https://picsum.photos/" target="_blank">Lorem Picsum (image placeholder)</a></li>
-						<li><a href="https://validator.w3.org/">HTML validator</a></li>
+						<li><a href="https://validator.w3.org/" target="_blank">HTML validator</a></li>
+						<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference" target="_blank">CSS Reference</a></li>
 						<li><a href=""></a></li>
 					</ul>
 				</section>
@@ -295,20 +298,72 @@
 							</footer>
 						</article>
 						<br>
-					</article>
-					<br>
-					<article class=""><!-- notes -->
-						<header>
-							<h3></h3>
-						</header>
-						<section class="">
-							<p></p>
-						</section>
-						<footer>
-							<p></p>
-						</footer>
-					</article>
-					<br>
+						</article>
+						<br>
+						<article class=""><!-- Cascading and specificity notes -->
+							<header>
+								<h3>Cascading and specificity</h3>
+							</header>
+							<section class="">
+								<p>The term "cascading" in <em>Cascading Style Sheets</em> refers to the way that style properties "cascade" down the DOM tree, 
+									starting at the top. A style applied to the [body] element will affect the entire document. A style applied to a 
+									lower-level element will affect that element and all its descendants.</p>
+								<p>A style applied at a lower level can override a style at a higher level. For instance, if the [body] has [color: red] but 
+									a paragraph within the body has [color: blue], the blue will apply to that paragraph and to any elements inside it:</p>
+							</section>
+							<footer>
+								<p>This is a pretty logical way to do things.</p>
+							</footer>
+						</article>
+						<br>
+						</article>
+						<br>
+						<article class=""><!-- Exercise: Blue box -->
+							<header>
+								<h3>Exercise: Blue box</h3>
+							</header>
+							<section class="">
+								<style>
+									.box {
+										border: 10px solid blue; 
+										width: 150px; 
+										height: 100px;
+										padding: 0.5em;
+										margin: 0.5em;
+										
+										}
+									.small {
+										border: 10px solid red; 
+										width: 20px; 
+										height: 20px;
+										padding: 0.5em;
+										margin: 0.5em;
+										float: left;
+										}
+								</style>
+								<div class="box">Hooray, a box!
+									<div class="small"></div>
+								</div>
+							</section>
+							<footer>
+								<p>Thinking in px, pt, and em is hard but this exercise helped.</p>
+							</footer>
+						</article>
+						<br>
+						</article>
+						<br>
+						<article class=""><!-- notes -->
+							<header>
+								<h3></h3>
+							</header>
+							<section class="">
+								<p></p>
+							</section>
+							<footer>
+								<p></p>
+							</footer>
+						</article>
+						<br>
 
 					</section>
 				<br>
