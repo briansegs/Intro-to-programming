@@ -8,10 +8,23 @@ strong {
 }
 body {
 	background-color: #F7F8FF; 
-	font-family: Rubik, Arial;  
+	font-family: Rubik, Arial;
+	margin-left: 1em; 
+	color: #242C33; 
 }
 .main {
 	width: 80%;
+	margin-left: 1em;
+	
+	
+}
+.main footer {
+	
+	color: #565C6E
+}
+.notes {
+	margin-left: 1em;
+	color: #2e3d49;
 }
 .footer {
 	position: fixed; 
@@ -19,7 +32,17 @@ body {
 	bottom: 0; 
 	width: 100%; 
 	text-align: center; 
-	background-color: #F7F8FF; }
+	background-color: #F7F8FF;
+}
+.footer p {
+	margin-top: 8px; 
+	margin-bottom: 8px; 
+}
+.footer hr {
+	margin-top: 0px;
+}
 em {
 	color:#E80055
 }
+li {list-style-type: square;}
+
