@@ -10,21 +10,25 @@ body {
 	background-color: #F7F8FF; 
 	font-family: Rubik, Arial;
 	margin-left: 1em; 
-	color: #242C33; 
+	color: #242C33;
+	
 }
 .main {
-	width: 80%;
+	
 	margin-left: 1em;
 	
 	
 }
 .main footer {
-	
+	max-width: 700px;
 	color: #565C6E
 }
 .notes {
+	max-width: 700px;
 	margin-left: 1em;
 	color: #2e3d49;
+	
+
 }
 .footer {
 	position: fixed; 
