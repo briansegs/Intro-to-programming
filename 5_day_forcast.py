@@ -1,6 +1,3 @@
-
-
-
 import requests
 
 API_ROOT = 'https://www.metaweather.com'
@@ -18,15 +15,17 @@ def fetch_weather(woeid):
 
 def display_weather(weather):
     d = weather
-    day = d['consolidated_weather'][0]['applicable_date']
-    max_t = round(c_to_f(d['consolidated_weather'][0]['max_temp']))
-    min_t = round(c_to_f(d['consolidated_weather'][0]['min_temp']))
-    the_t = round(c_to_f(d['consolidated_weather'][0]['the_temp']))
-    weather_state = d['consolidated_weather'][0]['weather_state_name']
-
-    print(f"Weather for {weather['title']} {day}:")
-    print(f"It looks like {weather_state} outside.")
-    print(f"The temperature is {the_t} degrees with a high of {max_t} degrees and a low of {min_t} degrees.")
+    print(f"5 day Weather forcast for {weather['title']}:")
+    for i in range(6):
+        day = d['consolidated_weather'][i]['applicable_date']
+        max_t = round(c_to_f(d['consolidated_weather'][i]['max_temp']))
+        min_t = round(c_to_f(d['consolidated_weather'][i]['min_temp']))
+        the_t = round(c_to_f(d['consolidated_weather'][i]['the_temp']))
+        weather_state = d['consolidated_weather'][i]['weather_state_name']
+        
+        print(f"For day {i + 1} {day}")
+        print(f"It looks like {weather_state} outside.")
+        print(f"The temperature is {the_t} degrees with a high of {max_t} degrees and a low of {min_t} degrees.")
 
 def disambiguate_locations(locations):
     print("Ambiguous location! Did you mean:")
@@ -50,4 +49,3 @@ def weather_dialog():
 if __name__ == '__main__':
     while True:
         weather_dialog()
-
