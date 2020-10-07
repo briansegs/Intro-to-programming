@@ -41,3 +41,4 @@ while index < len(string):
         output.append(string[index])
         index += 1
 print("".join(output))
+

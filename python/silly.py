@@ -8,14 +8,13 @@ def silly_string(nouns, verbs, templates):
     v = '{{verb}}'
     out = []
     i = 0
-    
     while i < len(temp):
         noun = random.choice(nouns)
         verb = random.choice(verbs)
-        if temp[i : i + len(n)] == n:
+        if temp[i: i + len(n)] == n:
             out.append(noun)
             i += len(n)
-        elif temp[i : i + len(v)] == v:
+        elif temp[i: i + len(v)] == v:
             out.append(verb)
             i += len(v)
         else:
@@ -23,6 +22,7 @@ def silly_string(nouns, verbs, templates):
             i += 1
     return "".join(out)
 
+
 if __name__ == '__main__':
-    print(silly_string(words.nouns, words.verbs,
-        words.templates))
+    print(silly_string(words.nouns, words.verbs, 
+    words.templates))
