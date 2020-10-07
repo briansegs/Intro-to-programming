@@ -1,3 +1,5 @@
+import antigravity
+
 location = 1
 size = 3
 word = 'fascinating'
