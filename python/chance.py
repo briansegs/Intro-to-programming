@@ -9,5 +9,5 @@ else:
 	print('Tails - You lose!')
 
 def die_roll():
-	return random.randint([1, 6])
+	return random.randint(1, 6)
 
