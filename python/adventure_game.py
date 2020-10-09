@@ -20,15 +20,11 @@ def valid_input(promt, option1, option2):
             time_print("Sorry, I don't understand.")
     return response
 
-def get_name():
-    name = input("To start enter your name\n")
-    items = {
-        'key':'', 
-        'player_name':''
-        }
-    return name
+def get_name(items):
+    items['player_name'] = input("To start enter your name\n")
+    return items
 
-def intro(name):
+def intro():
     lst = [
         "A brave warrior wonders the world to find great power.",
         "their journey leads them to a small town hidden at the peak of a mountain.",
@@ -39,17 +35,39 @@ def intro(name):
         ]
     time_print_loop(lst)    
 
-def location():
+def location(items):
     lst = [
-        "What do you wan't to do?",
-        "1. Go see the master of nature",
+        f"What do you wan't to do {items['player_name']}?",
+        "Type 1 to go see the master of nature.",
         ]
     time_print_loop(lst)
-    choice = int(valid_input("2. Go see the master of spirit\n", "1", "2"))
-    return choice
+    number = input("Type 2 to go see the master of spirit.\n")
+    return number
+
+def enter(items):
+    choice = location(items)
+    if choice == '1':
+        print('first')
+    elif choice == '2':
+        print('second')
+    else:
+        enter(items)
+    enter(items)
+
+def go(floor, name):
+    lst = [
+        f'You push the button for the {floor} floor.', 
+        f'After a few moments, you find yourself in the {name}.'
+        ]
+    p_loop(lst)
 
 def play():
-    intro(get_name())
-    location()
+    items = {
+    'key':'', 
+    'player_name':''
+    }
+    get_name(items)
+    intro()
+    enter(items)
 
 play()
