@@ -52,7 +52,8 @@ def boss_attack(stats):
             time_print_loop(lst)
             town(items)
     else:
-        time_print('You have died')
+        time_print('You have died!')
+        play_again()
         
 def player_attack(stats):
     if stats['boss_name'] == 'Big Boi':
@@ -71,6 +72,7 @@ def player_attack(stats):
         who_attacks(stats)
     else:
         time_print('You have Won!')
+        play_again()
         
 def who_attacks(stats):    
     result = coin_flip()
@@ -112,10 +114,10 @@ def play_again():
     if replay == "yes":
         play()
     elif replay == "no":
-        time_print("Ok thanks for playing")
+        time_print("Thanks for playing!")
 
 def fight(items):
-    intro()
+    intro_fight()
     who_attacks(choose_stats(items))
     play_again()
 
