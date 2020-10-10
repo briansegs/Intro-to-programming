@@ -84,7 +84,7 @@ def intro():
     time_print('You are both still, waiting for the right time to make your move, and then...')
 
 
-def choose_stats(items = {'key':'thing1', 'player_name':'Brian'}):
+def choose_stats(items):
     opt1 = {
         'boss_hp': 10, 
         'player_hp': 10,
@@ -97,7 +97,7 @@ def choose_stats(items = {'key':'thing1', 'player_name':'Brian'}):
         'boss_name': 'Small Boi',
         'player_name':'None'
         }
-    if items['key'] == 'thing1':
+    if items['key'] == '1':
         opt1['player_name'] = items['player_name']
         stats = opt1
     else:
@@ -105,13 +105,13 @@ def choose_stats(items = {'key':'thing1', 'player_name':'Brian'}):
         stats = opt2
     return stats
      
-def fight():
+def fight(items):
     intro()
-    who_attacks(choose_stats())
+    who_attacks(choose_stats(items))
 
 
 if __name__ == "__main__":
-    fight()
+    fight(items)
     
 
 
