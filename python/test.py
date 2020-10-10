@@ -50,6 +50,7 @@ def boss_attack(stats):
                 "You live to fight another day."
                 ]
             time_print_loop(lst)
+            town(items)
     else:
         time_print('You have died')
         
@@ -80,7 +81,7 @@ def who_attacks(stats):
     else:
         who_attacks(stats)
 
-def intro():    
+def intro_fight():    
     time_print('You are both still, waiting for the right time to make your move, and then...')
 
 
@@ -106,16 +107,24 @@ def choose_stats(items):
     return stats
      
 def fight(items):
-    intro()
+    intro_fight()
     who_attacks(choose_stats(items))
+    play_again()
 
+def play_again():
+    time_print("Would you like to play again?")
+    replay = valid_input("Type (yes) or (no).", "yes", "no")
+    if replay == "yes":
+        play()
+    elif replay == "no":
+        time_print("Ok thanks for playing")
 # Story ------------------------------------------------------------>
 
 def get_name(items):
     items['player_name'] = input("To start enter your name\n")
     return items
 
-def intro_s():
+def intro_story():
     lst = [
         "A brave warrior wonders the world to find great power.",
         "their journey leads them to a small town hidden at the peak of a mountain.",
@@ -135,16 +144,15 @@ def location(items):
     number = input("Type (2) to go see the master of spirit.\n")
     return number
 
-def enter(items):
+def town(items):
     choice = location(items)
     if choice == '1':
         first(items)
     elif choice == '2':
         second(items)
     else:
-        enter(items)
-    enter(items)
-
+        town(items)
+    
 def first(items):
     time_print("You find yourself in front of a small wooden house surrounded by tall grass and giant oak trees.")
     if items['key'] == '1':
@@ -154,6 +162,7 @@ def first(items):
             "You head back into town."
             ]
         time_print_loop(lst)
+        town(items)
     elif items['key'] == '2':
         lst = [
             "Boss comes out to greet you and notices '2' on you.",
@@ -167,10 +176,11 @@ def first(items):
         lst = [
             "Boss greets you.",
             "She peers curiously into your eyes and senses your pure heart.",
-            "She asks you to be her student and to learn the ways of nature."
+            "She asks you to be her student and to learn the ways of nature.",
+            "Will you accept her offer?"
             ]
         time_print_loop(lst)
-        answer = valid_input("Will you accept her offer? Type (yes) or (no).\n", "yes", "no")
+        answer = valid_input("Type (yes) or (no).\n", "yes", "no")
         if answer == "yes":
             lst1 = [
                 "For the next year you spend every day with boss learning the ways of nature.",
@@ -180,11 +190,19 @@ def first(items):
                 '"This is my most powerful technique name."',
                 '"You are ready to face boss."',
                 '"Go defeat him!"\n',
-                "You have gain the power of technique!\n"
+                "*You have gain the power of technique!*\n"
                 ]
             time_print_loop(lst1)
             items['key'] = '1'
             time_print("With the training from boss and the power of technique, you leave and head into town.")
+            town(items)
+        elif answer == "no":
+            lst2 = [
+                '''Boss - "I hope you will reconsider my offer." ''',
+                "You leave the small house and return home."
+                ]
+            time_print_loop(lst2)
+            town(items)
 
 def second(items):
     time_print("You find yourself in front of a large stone house surrounded by ancient sculpturs with characters carved into them.")
@@ -195,6 +213,7 @@ def second(items):
             "You head back into town."
             ]
         time_print_loop(lst)
+        town(items)
     elif items['key'] == '1':
         lst = [
             "Boss comes out to greet you and notices '1' on you.",
@@ -208,10 +227,11 @@ def second(items):
         lst = [
             "Boss greets you.",
             "He sizes you up and senses your desire for power.",
-            "He asks you to be his student and to become a spiritual master."
+            "He asks you to be his student and to become a spiritual master.",
+            "Will you accept his offer?"
             ]
         time_print_loop(lst)
-        answer = valid_input("Will you accept his offer? Type (yes) or (no).\n", "yes", "no")
+        answer = valid_input("Type (yes) or (no).\n", "yes", "no")
         if answer == "yes":
             lst1 = [
                 "For the next year you spend every day with boss learning spiritual techniques .",
@@ -221,11 +241,19 @@ def second(items):
                 '"This is my most powerful technique name."',
                 '"You are ready to face boss."',
                 '"Go defeat her!"\n',
-                "You have gain the power of technique!\n"
+                "*You have gain the power of technique!*\n"
                 ]
             time_print_loop(lst1)
             items['key'] = '2'
             time_print("With the training from boss and the power of technique, you leave and head into town.")
+            town(items)
+        elif answer == "no":
+            lst2 = [
+                '''Boss - "I hope you will reconsider my offer." ''',
+                "You leave the large stone house and return home."
+                ]
+            time_print_loop(lst2)
+            town(items)
 
 def play():
     items = {
@@ -233,7 +261,7 @@ def play():
     'player_name':''
     }
     get_name(items)
-    intro_s()
-    enter(items)
+    intro_story()
+    town(items)
 
 play()

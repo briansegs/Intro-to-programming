@@ -25,7 +25,7 @@ def get_name(items):
     items['player_name'] = input("To start enter your name\n")
     return items
 
-def intro():
+def intro_story():
     lst = [
         "A brave warrior wonders the world to find great power.",
         "their journey leads them to a small town hidden at the peak of a mountain.",
@@ -45,16 +45,15 @@ def location(items):
     number = input("Type (2) to go see the master of spirit.\n")
     return number
 
-def enter(items):
+def town(items):
     choice = location(items)
     if choice == '1':
         first(items)
     elif choice == '2':
         second(items)
     else:
-        enter(items)
-    enter(items)
-
+        town(items)
+    
 def first(items):
     time_print("You find yourself in front of a small wooden house surrounded by tall grass and giant oak trees.")
     if items['key'] == '1':
@@ -64,6 +63,7 @@ def first(items):
             "You head back into town."
             ]
         time_print_loop(lst)
+        town(items)
     elif items['key'] == '2':
         lst = [
             "Boss comes out to greet you and notices '2' on you.",
@@ -78,7 +78,7 @@ def first(items):
             "Boss greets you.",
             "She peers curiously into your eyes and senses your pure heart.",
             "She asks you to be her student and to learn the ways of nature.",
-            "Will you accept his offer?"
+            "Will you accept her offer?"
             ]
         time_print_loop(lst)
         answer = valid_input("Type (yes) or (no).\n", "yes", "no")
@@ -96,12 +96,14 @@ def first(items):
             time_print_loop(lst1)
             items['key'] = '1'
             time_print("With the training from boss and the power of technique, you leave and head into town.")
+            town(items)
         elif answer == "no":
             lst2 = [
                 '''Boss - "I hope you will reconsider my offer." ''',
                 "You leave the small house and return home."
                 ]
             time_print_loop(lst2)
+            town(items)
 
 def second(items):
     time_print("You find yourself in front of a large stone house surrounded by ancient sculpturs with characters carved into them.")
@@ -112,6 +114,7 @@ def second(items):
             "You head back into town."
             ]
         time_print_loop(lst)
+        town(items)
     elif items['key'] == '1':
         lst = [
             "Boss comes out to greet you and notices '1' on you.",
@@ -144,12 +147,14 @@ def second(items):
             time_print_loop(lst1)
             items['key'] = '2'
             time_print("With the training from boss and the power of technique, you leave and head into town.")
+            town(items)
         elif answer == "no":
             lst2 = [
                 '''Boss - "I hope you will reconsider my offer." ''',
-                "You leave the small house and return home."
+                "You leave the large stone house and return home."
                 ]
             time_print_loop(lst2)
+            town(items)
 
 def play():
     items = {
@@ -157,7 +162,7 @@ def play():
     'player_name':''
     }
     get_name(items)
-    intro()
-    enter(items)
+    intro_story()
+    town(items)
 
 play()

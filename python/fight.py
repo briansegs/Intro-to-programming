@@ -50,6 +50,7 @@ def boss_attack(stats):
                 "You live to fight another day."
                 ]
             time_print_loop(lst)
+            town(items)
     else:
         time_print('You have died')
         
@@ -80,7 +81,7 @@ def who_attacks(stats):
     else:
         who_attacks(stats)
 
-def intro():    
+def intro_fight():    
     time_print('You are both still, waiting for the right time to make your move, and then...')
 
 
@@ -105,9 +106,19 @@ def choose_stats(items):
         stats = opt2
     return stats
      
+def play_again():
+    time_print("Would you like to play again?")
+    replay = valid_input("Type (yes) or (no).", "yes", "no")
+    if replay == "yes":
+        play()
+    elif replay == "no":
+        time_print("Ok thanks for playing")
+
 def fight(items):
     intro()
     who_attacks(choose_stats(items))
+    play_again()
+
 
 
 if __name__ == "__main__":
