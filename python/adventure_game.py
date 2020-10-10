@@ -60,6 +60,7 @@ def first(items):
         lst = [
             "Boss doesn't seem to be home.",
             "There doesn't seem to be much to do here."
+            "You head back into town."
             ]
         time_print_loop(lst)
     else:
@@ -78,8 +79,8 @@ def first(items):
                 "She opens her hands, they glow bright green as she places them over your chest and says...",
                 '"This is my most powerful technique name."',
                 '"You are ready to face boss."',
-                '"Now go defeat him!"\n',
-                "You have gain the power of technique!"
+                '"Go defeat him!"\n',
+                "You have gain the power of technique!\n"
                 ]
             time_print_loop(lst1)
             items['key'] = '1'
