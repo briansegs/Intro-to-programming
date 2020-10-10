@@ -1,5 +1,6 @@
 import time
 import random
+import fight
 
 def time_print(string):
     print(string)
@@ -47,19 +48,43 @@ def location(items):
 def enter(items):
     choice = location(items)
     if choice == '1':
-        print('first')
+        first(items)
     elif choice == '2':
         print('second')
     else:
         enter(items)
     enter(items)
 
-def go(floor, name):
-    lst = [
-        f'You push the button for the {floor} floor.', 
-        f'After a few moments, you find yourself in the {name}.'
-        ]
-    p_loop(lst)
+def first(items):
+    if items['key'] == '1':
+        lst = [
+            "Boss doesn't seem to be home.",
+            "There doesn't seem to be much to do here."
+            ]
+        time_print_loop(lst)
+    else:
+        lst = [
+            "Boss greets you.",
+            "She peers curiously into your eyes and senses your pure heart.",
+            "She asks you to be her student and to learn the ways of nature."
+            ]
+        time_print_loop(lst)
+        answer = valid_input("Will you accept her offer? Type (yes) or (no).", "yes", "no")
+        if answer == "yes":
+            lst1 = [
+                "For the next year you spend every day with boss learning the ways of nature.",
+                "You learn that she and the town have been under attack from Boss for many years.",
+                "She wants you to end his reign of terror once and for all.",
+                "She opens her hands, they glow bright green as she places them over your chest and says...",
+                '"This is my most powerful technique name."',
+                '"You are ready to face boss."',
+                '"Now go defeat him!"\n',
+                "You have gain the power of technique!"
+                ]
+            time_print_loop(lst1)
+            items['key'] = '1'
+            time_print("With the training from boss and the power of technique, you leave and head into town.")
+
 
 def play():
     items = {

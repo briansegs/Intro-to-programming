@@ -110,8 +110,8 @@ def fight():
     who_attacks(choose_stats())
 
 
-
-fight()
+if __name__ == "__main__":
+    fight()
     
 
 
