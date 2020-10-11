@@ -9,7 +9,7 @@ def die_roll():
 
 def time_print(string):
     print(string)
-    time.sleep(1)
+    time.sleep(2)
 
 def time_print_loop(lst):
     for i in range(len(lst)):
@@ -149,13 +149,13 @@ def town(items):
     if choice == '1':
         clover(items)
     elif choice == '2':
-        second(items)
+        Elijah(items)
     else:
         town(items)
     
 def clover(items):
     time_print("You find yourself in front of a small wooden house surrounded by tall grass and massive oak trees.")
-    if items['key'] == '1':
+    if items['key'] == '*Primal Command*':
         lst = [
             "Clover isn't home right now.",
             "There doesn't seem to be much to do here.",
@@ -167,7 +167,7 @@ def clover(items):
         lst = [
             "Clover comes out to greet you and notices '2' on you.",
             "She understands why you have come.",
-            '''Clover- "I will not be intimidated by one of Boss's thugs!"''', 
+            '''(Clover) "I will not be intimidated by one of Boss's thugs!"''', 
             "Clover twirls her hands in the air, forming a bright green aura around herself."
             ]
         time_print_loop(lst)
@@ -176,60 +176,61 @@ def clover(items):
         lst = [
             "Clover, brown-haired and slender, with bright, dark eyes, comes out to greet you.",
             "She peers curiously into you and senses your kind heart.",
-            f'''Clover - "{items['player_name']}, I am the master you seek."''',
-            '''Clover - "Train under me and uncover the secrets only I and mother nature know."\n''',
-            "Will you accept her offer?",
-            "(1) Yes",
+            f'''(Clover) "{items['player_name']}, I am the master you seek."''',
+            '''(Clover) "Train under me and unearth the secrets only I and mother nature know."\n''',
+            "Will you accept her offer?"
             ]
         time_print_loop(lst)
-        answer = valid_input("(2) No\n", "yes", "no")
-        if answer == "yes":
+        answer = valid_input("(1) Yes\n(2) No\n", "1", "2")
+        if answer == "1":
             lst1 = [
-                "For the next year you spend every day with boss learning the ways of nature.",
-                "You learn that she and the town have been under attack from Boss for many years.",
-                "She wants you to end his reign of terror once and for all.",
-                "She opens her hands, they glow bright green as she places them over your chest and says...",
-                '"This is my most powerful technique name."',
-                '"You are ready to face boss."',
-                '"Go defeat him!"\n',
-                "*You have gain the power of technique!*\n"
+                "For the next year you apprentice yourself to Clover, cultivating your skills.",
+                "You pickedup that a man named Boss has been trying to steal Clover's power for many years.",
+                "You promised Clover that you will bring an end to Boss's reign of terror.",
+                "Clover was touched by your commitment.",
+                "To conclude your final day of training, Clover requests that you meet her infront of her house.",
+                f'''(Clover) "{items['player_name']}, everything that you have endured was to prepare you for this."''',
+                '''(Clover) "*Primal Command* is my greatest weapon and now it is yours."''',
+                f'''(Clover) "Remember your promise and good luck on your travels {items['player_name']}."\n''',
+                "You recieve *Primal Command*\n"
                 ]
             time_print_loop(lst1)
-            items['key'] = '1'
-            time_print("With the training from boss and the power of technique, you leave and head into town.")
+            items['key'] = '*Primal Command*'
+            time_print("With the training from Clover and the power of *Primal Command*, you leave and head into town.")
             town(items)
-        elif answer == "no":
+        elif answer == "2":
             lst2 = [
-                '''Boss - "I hope you will reconsider my offer." ''',
+                '''(Clover) "I hope you will reconsider my offer." ''',
                 "You leave the small house and return to town."
                 ]
             time_print_loop(lst2)
             town(items)
 
-def second(items):
-    time_print("You find yourself in front of a large stone house surrounded by ancient sculpturs with characters carved into them.")
+def Elijah(items):
+    time_print("You find yourself in front of a large log cabin surrounded by ancient stone sculpturs, both covered in snow.")
     if items['key'] == '2':
         lst = [
-            "Boss isn't home right now.",
+            "Elijah isn't home right now.",
             "There doesn't seem to be much to do here.",
             "You head back into town."
             ]
         time_print_loop(lst)
         town(items)
-    elif items['key'] == '1':
+    elif items['key'] == '*Primal Command*':
         lst = [
-            "Boss comes out to greet you and notices '1' on you.",
+            f"Elijah comes out to greet you and notices you possess {items['key']}.",
             "He smiles at you and begins to glow bright red.",
-            '''Boss- "I want the power of technique and i will crush you to take it."''', 
-            "Boss gets into a fighting stance."
+            '''(Elijah) "I want the power of *Primal Command* and i will crush you to take it!"''', 
+            "Elijah gets into a fighting stance."
             ]
         time_print_loop(lst)
         fight(items)
     else:
         lst = [
-            "Boss greets you.",
-            "He sizes you up and senses your desire for power.",
-            "He asks you to be his student and to become a spiritual master.",
+            "Elijah, tall with powerful shoulders, and fierce blue eyes, comes out to greets you.",
+            "He sizes you up, feeling your desire for power.",
+            f'''(Elijah) "{items['player_name']}, I am the master you seek."''',
+            '''(Elijah) "Take my guidence and uncover limitless potential of the spirit relm."\n''',
             "Will you accept his offer?"
             ]
         time_print_loop(lst)
