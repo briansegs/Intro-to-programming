@@ -149,7 +149,7 @@ def town(items):
     if choice == '1':
         clover(items)
     elif choice == '2':
-        Elijah(items)
+        elijah(items)
     else:
         town(items)
     
@@ -163,11 +163,11 @@ def clover(items):
             ]
         time_print_loop(lst)
         town(items)
-    elif items['key'] == '2':
+    elif items['key'] == '*Banishing Light*':
         lst = [
-            "Clover comes out to greet you and notices '2' on you.",
+            "Clover comes out to greet you and notices *Banishing Light* in your possession.",
             "She understands why you have come.",
-            '''(Clover) "I will not be intimidated by one of Boss's thugs!"''', 
+            '''(Clover) "I will not be intimidated by one of Elijah's thugs!"''', 
             "Clover twirls her hands in the air, forming a bright green aura around herself."
             ]
         time_print_loop(lst)
@@ -185,8 +185,8 @@ def clover(items):
         if answer == "1":
             lst1 = [
                 "For the next year you apprentice yourself to Clover, cultivating your skills.",
-                "You pickedup that a man named Boss has been trying to steal Clover's power for many years.",
-                "You promised Clover that you will bring an end to Boss's reign of terror.",
+                "You pickedup that a man named Elijah has been trying to steal Clover's power for many years.",
+                "You promised Clover that you will bring an end to Elijah's reign of terror.",
                 "Clover was touched by your commitment.",
                 "To conclude your final day of training, Clover requests that you meet her infront of her house.",
                 f'''(Clover) "{items['player_name']}, everything that you have endured was to prepare you for this."''',
@@ -206,9 +206,9 @@ def clover(items):
             time_print_loop(lst2)
             town(items)
 
-def Elijah(items):
-    time_print("You find yourself in front of a large log cabin surrounded by ancient stone sculpturs, both covered in snow.")
-    if items['key'] == '2':
+def elijah(items):
+    time_print("You find yourself in front of a massive log cabin surrounded by aged stone sculpturs, both covered in snow.")
+    if items['key'] == '*Banishing Light*':
         lst = [
             "Elijah isn't home right now.",
             "There doesn't seem to be much to do here.",
@@ -220,7 +220,7 @@ def Elijah(items):
         lst = [
             f"Elijah comes out to greet you and notices you possess {items['key']}.",
             "He smiles at you and begins to glow bright red.",
-            '''(Elijah) "I want the power of *Primal Command* and i will crush you to take it!"''', 
+            '''(Elijah) "I crave the power of *Primal Command* and i will crush you to obtain it!"''', 
             "Elijah gets into a fighting stance."
             ]
         time_print_loop(lst)
@@ -230,30 +230,32 @@ def Elijah(items):
             "Elijah, tall with powerful shoulders, and fierce blue eyes, comes out to greets you.",
             "He sizes you up, feeling your desire for power.",
             f'''(Elijah) "{items['player_name']}, I am the master you seek."''',
-            '''(Elijah) "Take my guidence and uncover limitless potential of the spirit relm."\n''',
+            '''(Elijah) "Take my guidence and uncover the limitless potential of the spirit relm."\n''',
             "Will you accept his offer?"
             ]
         time_print_loop(lst)
         answer = valid_input("Type (yes) or (no).\n", "yes", "no")
         if answer == "yes":
             lst1 = [
-                "For the next year you spend every day with boss learning spiritual techniques .",
-                "You learn that he has been trying to take over the town and rule it for years.",
-                "He wants you help him by defeating boss, the only peorson truly standing in his way.",
-                "He opens his hands, they glow bright red as he places them over your chest and says...",
-                '"This is my most powerful technique name."',
-                '"You are ready to face boss."',
-                '"Go defeat her!"\n',
-                "*You have gain the power of technique!*\n"
+                "For the next year you memorize every mystical technique offerered to you by Elijah.",
+                "Elijah shares his disire to increase his capabilities by defeating other masters and taking their power.",
+                "He wants you to assist him and share the gifts of the bounty, becomming allpowerful.",
+                "Elijah feels that with you, his dreams can be realized.",
+                "To conclude your final day of training, Elijah requests that you meet him infront of his house.",
+                f'''(Elijah) "{items['player_name']}, everything that you have encountered has prepare you for this."''',
+                '''(Elijah) "*Banishing Light* is my greatest technique and now it is yours."''',
+                f'''(Elijah) "{items['player_name']}, I want you to defeat a master named Clover to the east and take her power.''',
+                '''(Elijah) "Leave now and only return when you have completed your mission."\n''',
+                "You recieve *Primal Command*\n"
                 ]
             time_print_loop(lst1)
-            items['key'] = '2'
-            time_print("With the training from boss and the power of technique, you leave and head into town.")
+            items['key'] = '*Banishing Light*'
+            time_print("With the training from Elijah and the power of *Banishing Light*, you leave and head into town.")
             town(items)
         elif answer == "no":
             lst2 = [
-                '''Boss - "I hope you will reconsider my offer." ''',
-                "You leave the large stone house and return to town."
+                '''(Elijah) - "I hope you will reconsider my offer." ''',
+                "You leave the massive log cabin and return to town."
                 ]
             time_print_loop(lst2)
             town(items)
