@@ -64,6 +64,26 @@ def choose_stats(items):
         items.update(opt2)
     return items
 
+def play_again():
+    time_print("Would you like to play again?")
+    replay = valid_input("(1) Yes\n(2) No\n", "1", "2")
+    if replay == "1":
+        play()
+    elif replay == "2":
+        time_print("Ok, thanks for playing!")
+        lst = [
+            "",
+            " ,----.                                 ,-----. ",                        
+            "'  .-./    ,--,--.,--,--,--. ,---.     '  .-.  ',--.  ,--.,---. ,--.--. ",
+            "|  | .---.' ,-.  ||        || .-. :    |  | |  | \  `'  /| .-. :|  .--' ",
+            "'  '--'  |\ '-'  ||  |  |  |\   --.    '  '-'  '  \    / \   --.|  | ",   
+            " `------'  `--`--'`--`--`--' `----'     `-----'    `--'   `----'`--' ",
+            ""    
+            ]
+        time_print_img(lst)
+
+#<----- Fight Flow ----->
+
 def pick_who_attacks(items):    
     result = coin_flip()
     if result == 'heads':
@@ -73,14 +93,6 @@ def pick_who_attacks(items):
     else:
         pick_who_attacks(items)
 
-def play_again():
-    time_print("Would you like to play again?")
-    replay = valid_input("(1) Yes\n(2) No\n", "1", "2")
-    if replay == "1":
-        play()
-    elif replay == "2":
-        time_print("Ok thanks for playing!")
-
 #<-------------------------------- Boss Functions -------------------------------->
 
 def dont_run(items):
@@ -89,9 +101,11 @@ def dont_run(items):
 
 def run(items):
     lst = [
-        f'''({items['player_name']}) "Im in over my head."\n''', 
+        f'''({items['player_name']}) "Im in over my head."''',
+        "", 
         f"{items['player_name']} runs from the battle and escapes {items['boss_name']}.", 
-        "You live to fight another day and return to town.\n"
+        "You live to fight another day and return to town.",
+        ""
         ]
     time_print_loop(lst)
     town(items)
@@ -100,23 +114,25 @@ def clover_attacks(items):
     dmg = die_roll() + die_roll() 
     items['player_hp'] -= dmg
     lst = [
-        f"{items['boss_name']} thrust her hands out tward you, shouting *Primal Command*!, as a torrent of all 5 elements crash into you.\n",
+        f"{items['boss_name']} thrust her hands out tward you, shouting *Primal Command*!, as a torrent of all 5 elements crash into you.",
+        "",
         f"{items['boss_name']} hits you for {dmg} damage.", 
-        f"your health is now at {items['player_hp']}"
+        f"your health is now at {items['player_hp']}",
+        ""
         ]
     time_print_loop(lst)
-    contine_on()
 
 def elijah_attacks(items):
     dmg = die_roll() * 2 
     items['player_hp'] -= dmg
     lst = [
-        f"{items['boss_name']} shouts *Banishing Light*! as a massive beam of light stricks you from the sky.\n",
+        f"{items['boss_name']} shouts *Banishing Light*! as a massive beam of light stricks you from the sky.",
+        "",
         f"{items['boss_name']} hits you for {dmg} damage.", 
-        f"your health is now at {items['player_hp']}\n"
+        f"your health is now at {items['player_hp']}",
+        ""
         ]
     time_print_loop(lst)
-    contine_on()
 
 def boss_turn(items):    
     if items['boss_name'] == 'Clover':
@@ -142,9 +158,11 @@ def player_attack(items):
         dmg = die_roll() + die_roll() 
     items['boss_hp'] -= dmg
     lst = [
-        f"{items['player_name']} bolts toward {items['boss_name']}, shouting {items['key']}!, as he blast {items['boss_name']} with a punishing strike.\n",
+        f"{items['player_name']} bolts toward {items['boss_name']}, shouting {items['key']}!, as he blast {items['boss_name']} with a punishing strike.",
+        "",
         f"You hit {items['boss_name']} for {dmg} damage points.",
-        f"{items['boss_name']}'s health is now at {items['boss_hp']}\n"
+        f"{items['boss_name']}'s health is now at {items['boss_hp']}",
+        ""
         ]
     time_print_loop(lst)
     contine_on()
@@ -201,12 +219,12 @@ def intro_story():
         ]
     time_print_loop(lst)
     lst = [
-        "        __   .  /\   .           .",
-        "    *  /  \ *  /  \_         *     /\ __        *",
-        "      /    \  /\ '  \*           _/  /  \  *'.",
-        " .   /\/\  /\/ :' __ \_      _ /   ^/_   `--.",
-        "    /    \/  \  _/  \-'\    /   ^ _   \_ ^ .'\  *",
-        "  /\  .-   `. \/     \ /''' `.  _/ \  ^ `_/   \.",
+        "        __      /\                ",
+        "       /  \    /  \_               /\ __         ",
+        "      /    \  /\ '  \            _/  /  \     ",
+        "     /\/\  /\/ :' __ \_      _ /   ^/_   `--.",
+        "    /    \/  \  _/  \-'\    /   ^ _   \_ ^ .'\  ",
+        "  /\  .-   `. \/     \ /''' `._ _/ \  ^ `_/   \_",
         " /  `-.__ `   / .-'.--\ ''' / ^  `--./ .-'  `- ^",
         "/        `.  / /       `.''' .-' ^    '-._ `._  `-",
         "                          ''' "
