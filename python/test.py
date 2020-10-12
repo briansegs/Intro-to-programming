@@ -11,9 +11,18 @@ def time_print(string):
     print(string)
     time.sleep(2)
 
+def time_print_1(string):
+    print(string)
+    time.sleep(.5)
+
+
 def time_print_loop(lst):
     for i in range(len(lst)):
         time_print(lst[i])
+
+def time_print_loop_1(lst):
+    for i in range(len(lst)):
+        time_print_1(lst[i])
 
 def valid_input(promt, option1, option2):
     while True:
@@ -26,60 +35,69 @@ def valid_input(promt, option1, option2):
             time_print("Sorry, I don't understand.")
     return response
 
-def boss_attack(stats, items):    
-    if stats['boss_name'] == 'Big Boi':
+def boss_attack(items):    
+    if items['boss_name'] == 'Clover':
         dmg = die_roll() + die_roll() 
+        items['player_hp'] -= dmg
+        lst = [
+            f"{items['boss_name']} thrust her hands out tward you, shouting *Primal Command*!, as a torrent of all 5 elements crash into you.",
+            f"{items['boss_name']} hits you for {dmg} damage.", 
+            f"your health is now at {items['player_hp']}"
+            ]
+        time_print_loop(lst)
     else:
         dmg = die_roll() * 2 
-    stats['player_hp'] -= dmg
-    lst = [
-        f"{stats['boss_name']} unsheaths his sword, darts twards you, and slashes you with a swift blow.",
-        f"{stats['boss_name']} hits you for {dmg} damage points.", 
-        f"your health is now at {stats['player_hp']}"
-        ]
-    time_print_loop(lst)
-    if stats['player_hp'] > 0:
-        answer = valid_input('Continue fighting or flee the battle? Type flee or fight.\n', 'fight', 'flee')
-        if answer == "fight":
-            time_print(f'''{stats['player_name']} - "I will not back down!"''')
-            who_attacks(stats, items)
-        elif answer == "flee":
+        items['player_hp'] -= dmg
+        lst = [
+            f"{items['boss_name']} shouts *Banishing Light*! as a massive beam of light stricks you from the sky.",
+            f"{items['boss_name']} hits you for {dmg} damage.", 
+            f"your health is now at {items['player_hp']}\n"
+            ]
+        time_print_loop(lst)
+    if items['player_hp'] > 0:
+        answer = valid_input('Continue fighting or flee the battle?\n(1) Fight\n(2) Run\n', '1', '2')
+        if answer == "1":
+            time_print(f'''({items['player_name']}) "I will not give up!"''')
+            who_attacks(items)
+        elif answer == "2":
             lst = [
-                f'''{stats['player_name']} - "Im in over my head."''', 
-                f"{stats['player_name']} runs from the battle and escape Boss.", 
-                "You live to fight another day."
+                f'''({items['player_name']}) "Im in over my head."''', 
+                f"{items['player_name']} runs from the battle and escapes {items['boss_name']}.", 
+                "You live to fight another day and return to town."
                 ]
             time_print_loop(lst)
             town(items)
     else:
-        time_print('You have died')
+        time_print('You have died!')
+        play_again()
         
-def player_attack(stats, items):
-    if stats['boss_name'] == 'Big Boi':
+def player_attack(items):
+    if items['boss_name'] == 'Clover':
         dmg = die_roll() * 2
     else:
         dmg = die_roll() + die_roll() 
-    stats['boss_hp'] -= dmg
+    items['boss_hp'] -= dmg
     lst = [
-        f"{stats['player_name']} bolts toward {stats['boss_name']}, lifting oath breaker above his head, and then stricks {stats['boss_name']} with a heavy blow",
-        f"You hit {stats['boss_name']} for {dmg} damage points.",
-        f"{stats['boss_name']}'s health is now at {stats['boss_hp']}"
+        f"{items['player_name']} bolts toward {items['boss_name']}, shouting {items['key']}!, as he blast {items['boss_name']} with a punishing strike.",
+        f"You hit {items['boss_name']} for {dmg} damage points.",
+        f"{items['boss_name']}'s health is now at {items['boss_hp']}\n"
         ]
     time_print_loop(lst)
-    if stats['boss_hp'] > 0:
-        time_print(f'''{stats['boss_name']} - "Not bad!"''')
-        who_attacks(stats, items)
+    if items['boss_hp'] > 0:
+        time_print(f'''{items['boss_name']} - "Not bad!"''')
+        who_attacks(items)
     else:
         time_print('You have Won!')
+        play_again()
         
-def who_attacks(stats, items):    
+def who_attacks(items):    
     result = coin_flip()
     if result == 'heads':
-        player_attack(stats, items)
+        player_attack(items)
     elif result == 'tails':
-        boss_attack(stats, items)
+        boss_attack(items)
     else:
-        who_attacks(stats, items)
+        who_attacks(items)
 
 def intro_fight():    
     time_print('You are both still, waiting for the right time to make your move, and then...')
@@ -89,36 +107,53 @@ def choose_stats(items):
     opt1 = {
         'boss_hp': 10, 
         'player_hp': 10,
-        'boss_name': 'Big Boi',
-        'player_name':'None'
+        'boss_name': 'Elijah'
         }
     opt2 = {
         'boss_hp': 10, 
         'player_hp': 10, 
-        'boss_name': 'Small Boi',
-        'player_name':'None'
+        'boss_name': 'Clover',
         }
-    if items['key'] == '1':
-        opt1['player_name'] = items['player_name']
-        stats = opt1
+    if items['key'] == '*Primal Command*':
+        items.update(opt1)
     else:
-        opt2['player_name'] = items['player_name']
-        stats = opt2
-    return stats
+        items.update(opt2)
+    return items
      
 def fight(items):
     intro_fight()
-    who_attacks(choose_stats(items), items)
-    play_again()
+    who_attacks(choose_stats(items))
+   
 
 def play_again():
     time_print("Would you like to play again?")
-    replay = valid_input("Type (yes) or (no).", "yes", "no")
-    if replay == "yes":
+    replay = valid_input("(1) Yes\n(2) No\n", "1", "2")
+    if replay == "1":
         play()
-    elif replay == "no":
+    elif replay == "2":
         time_print("Ok thanks for playing!")
 # Story ------------------------------------------------------------>
+
+def title():
+    lst = [
+        "         ,--.",                                                                                                                           
+        "       ,--.'|                                                                                       ,--,    ,--,",                        
+        "   ,--,:  : |                                                                    ,---.            ,--.'|  ,--.'|",                        
+        ",`--.'`|  ' :             __  ,-.  __  ,-.   ,---.           .---.              /__./|            |  | :  |  | :",                        
+        "|   :  :  | |           ,' ,'/ /|,' ,'/ /|  '   ,'\         /. ./|         ,---.;  ; |            :  : '  :  : '",                        
+        ":   |   \ | :  ,--.--.  '  | |' |'  | |' | /   /   |     .-'-. ' |        /___/ \  | |   ,--.--.  |  ' |  |  ' |      ,---.       .--,",  
+        "|   : '  '; | /       \ |  |   ,'|  |   ,'.   ; ,. :    /___/ \: |        \   ;  \ ' |  /       \ '  | |  '  | |     /     \    /_ ./|",  
+        "'   ' ;.    ;.--.  .-. |'  :  /  '  :  /  '   | |: : .-'.. '   ' .         \   \  \: | .--.  .-. ||  | :  |  | :    /    /  |, ' , ' :",  
+        "|   | | \   | \__\/: . .|  | '   |  | '   '   | .; :/___/ \:     '          ;   \  ' .  \__\/: . .'  : |__'  : |__ .    ' / /___/ \: |",  
+        "'   : |  ; .' ,' .--.; |;  : |   ;  : |   |   :    |.   \  ' .\              \   \   '  ,' .--.; ||  | '.'|  | '.'|'   ;   /|.  \  ' |",  
+        "|   | '`--'  /  /  ,.  ||  , ;   |  , ;    \   \  /  \   \   ' \ |            \   `  ; /  /  ,.  |;  :    ;  :    ;'   |  / | \  ;   :",  
+        "'   : |     ;  :   .'   \---'     ---'      `----'    \   \  |--'              :   \ |;  :   .'   \  ,   /|  ,   / |   :    |  \  \  ;",  
+        ";   |.'     |  ,     .-./                              \   \ |                  '---' |  ,     .-./---`-'  ---`-'   \   \  /    :  \  \.", 
+        "'---'        `--`---'                                   '---'                          `--`---'                      `----'      \  ' ;", 
+        "                                                                                                                                  `--`", 
+                                                                                                                                    
+        ]
+    time_print_loop_1(lst)
 
 def get_name(items):
     items['player_name'] = input("To start enter your name\n")
@@ -128,12 +163,42 @@ def intro_story():
     lst = [
         "A brave warrior wonders the world in search of great power.",
         "their journey leads them to two sacred mountains divided by a village in a narrow valley.",
-        "At the peak of each holy mountain a great master resides.",
-        "One has conquered the forces of nature.",
-        "The other manipulates spiritual energy.",
-        "After a much needed rest in the town's inn, our hero sets out.\n"
         ]
-    time_print_loop(lst)    
+    time_print_loop(lst)
+    lst = [
+        "        __   .  /\   .           .",
+        "    *  /  \ *  /  \_         *     /\ __        *",
+        "      /    \  /\ '  \*           _/  /  \  *'.",
+        " .   /\/\  /\/ :' __ \_      _ /   ^/_   `--.",
+        "    /    \/  \  _/  \-'\    /   ^ _   \_ ^ .'\  *",
+        "  /\  .-   `. \/     \ /====`.  _/ \  ^ `_/   \.",
+        " /  `-.__ `   / .-'.--\ ====/ ^  `--./ .-'  `- ^",
+        "/        `.  / /       `.====.-' ^    '-._ `._  `-"
+        ]
+    time_print_loop_1(lst)        
+    lst = ["At the peak of each holy mountain a great master resides.",
+        "One has conquered the forces of nature.",
+        "The other manipulates spiritual energy."
+        ]
+    time_print_loop(lst)
+    lst = [
+        "           )            _     / \ ",
+        "   /\    ( _   _._     / \   /^  \ ",
+        "\ /  \    |_|-'_~_`-._/ ^ \ /  ^^ \ ",
+        " \ /\/\_.-'-_~_-~_-~-_`-._^/  ^    \ ",
+        "   _.-'_~-_~-_-~-_~_~-_~-_`-._   ^ ",
+        "  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+        "    |  [ ]   [ ]  [ ]   [ ] |",
+        "    |   ___     __    ___   |   ",
+        "    |  [___]   | .|  [___]  |  <inn>",
+        "    |________  |__|  _______|    |",
+        "^^^^^^^^^^^^^^^ === ^^^^^^^^^^^^^|^^ ",
+        "                ===   "
+        ]
+    time_print_loop_1(lst)
+    time_print("After a much needed rest in the village inn, our hero sets out.\n")
+        
+     
 
 def location(items):
     lst = [
@@ -159,7 +224,7 @@ def clover(items):
         lst = [
             "Clover isn't home right now.",
             "There doesn't seem to be much to do here.",
-            "You head back into town."
+            "You head back into town.\n"
             ]
         time_print_loop(lst)
         town(items)
@@ -168,16 +233,16 @@ def clover(items):
             "Clover comes out to greet you and notices *Banishing Light* in your possession.",
             "She understands why you have come.",
             '''(Clover) "I will not be intimidated by one of Elijah's thugs!"''', 
-            "Clover twirls her hands in the air, forming a bright green aura around herself."
+            "Clover twirls her hands in the air, forming a bright green aura around herself.\n"
             ]
         time_print_loop(lst)
         fight(items)
     else:
         lst = [
             "Clover, brown-haired and slender, with bright, dark eyes, comes out to greet you.",
-            "She peers curiously into you and senses your kind heart.",
+            "She peers curiously into you, sensing your kind heart...",
             f'''(Clover) "{items['player_name']}, I am the master you seek."''',
-            '''(Clover) "Train under me and unearth the secrets only I and mother nature know."\n''',
+            '''(Clover) "Train under me and unearth the secrets only I and Mother Nature know."\n''',
             "Will you accept her offer?"
             ]
         time_print_loop(lst)
@@ -185,9 +250,9 @@ def clover(items):
         if answer == "1":
             lst1 = [
                 "For the next year you apprentice yourself to Clover, cultivating your skills.",
-                "You pickedup that a man named Elijah has been trying to steal Clover's power for many years.",
-                "You promised Clover that you will bring an end to Elijah's reign of terror.",
-                "Clover was touched by your commitment.",
+                "You pickup that a man named Elijah has been trying to steal Clover's power for many years.",
+                "You promise Clover that you will bring an end to Elijah's reign of terror.",
+                "Clover is touched by your commitment.\n",
                 "To conclude your final day of training, Clover requests that you meet her infront of her house.",
                 f'''(Clover) "{items['player_name']}, everything that you have endured was to prepare you for this."''',
                 '''(Clover) "*Primal Command* is my greatest weapon and now it is yours."''',
@@ -212,7 +277,7 @@ def elijah(items):
         lst = [
             "Elijah isn't home right now.",
             "There doesn't seem to be much to do here.",
-            "You head back into town."
+            "You head back into town.\n"
             ]
         time_print_loop(lst)
         town(items)
@@ -221,38 +286,59 @@ def elijah(items):
             f"Elijah comes out to greet you and notices you possess {items['key']}.",
             "He smiles at you and begins to glow bright red.",
             '''(Elijah) "I crave the power of *Primal Command* and i will crush you to obtain it!"''', 
-            "Elijah gets into a fighting stance."
+            "Elijah gets into a fighting stance.\n"
             ]
         time_print_loop(lst)
         fight(items)
     else:
         lst = [
+                
+            "         .           .       (    )       *                *",
+            "    *                          )  )",
+            "        .                     (  (              .      /\ ",
+            "                           .   (_)                    /  \  /\ ",
+            "      *       *     ___________[_]___________      /\/    \/  \ ",
+            "           /\      /\   *       ______    *  \    /   /\/\  /\/\ ",
+            "          /  \    //_\          \    /\       \  /\/\/    \/    \ ",
+            "   /\    / /\/\  //___\       *  \__/  \  .    \/       *",
+            "  /  \  /\/*   \//_____\          \ |[]|        \ ",
+            " /\/\/\/       //_______\          \|__|         \           .",
+            "/   __ \      /XXXXXXXXXX\                        \       __",
+            "   /  \ \    /_I_I   I__I_\________________________\     /  \ ",
+            "  { () }       I_I   I__I_________[]_|_[]_________I     ( () )",
+            "   (  )  /\    I_II  I__I_________[]_|_[]_________I      (  )",
+            "    []  (  )   I I___I  I         XXXXXXX         I       []",
+            '    []   [] ~~~~~"   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     []',
+            "                ~~~~~~"
+            ]
+        time_print_loop_1(lst)
+        lst = [
             "Elijah, tall with powerful shoulders, and fierce blue eyes, comes out to greets you.",
-            "He sizes you up, feeling your desire for power.",
+            "He sizes you up, feeling your desire for power...",
             f'''(Elijah) "{items['player_name']}, I am the master you seek."''',
             '''(Elijah) "Take my guidence and uncover the limitless potential of the spirit relm."\n''',
             "Will you accept his offer?"
             ]
         time_print_loop(lst)
-        answer = valid_input("Type (yes) or (no).\n", "yes", "no")
-        if answer == "yes":
+        answer = valid_input("(1) Yes\n(2) No\n", "1", "2")
+        if answer == "1":
             lst1 = [
                 "For the next year you memorize every mystical technique offerered to you by Elijah.",
                 "Elijah shares his disire to increase his capabilities by defeating other masters and taking their power.",
-                "He wants you to assist him and share the gifts of the bounty, becomming allpowerful.",
-                "Elijah feels that with you, his dreams can be realized.",
+                "He wants you to assist him and share the bounty, both of you becomming allpowerful.",
+                "Elijah feels that with you, his dreams can be realized.\n",
                 "To conclude your final day of training, Elijah requests that you meet him infront of his house.",
                 f'''(Elijah) "{items['player_name']}, everything that you have encountered has prepare you for this."''',
                 '''(Elijah) "*Banishing Light* is my greatest technique and now it is yours."''',
                 f'''(Elijah) "{items['player_name']}, I want you to defeat a master named Clover to the east and take her power.''',
                 '''(Elijah) "Leave now and only return when you have completed your mission."\n''',
-                "You recieve *Primal Command*\n"
+                "You recieve *Banishing Light*\n"
                 ]
             time_print_loop(lst1)
             items['key'] = '*Banishing Light*'
             time_print("With the training from Elijah and the power of *Banishing Light*, you leave and head into town.")
             town(items)
-        elif answer == "no":
+        elif answer == "2":
             lst2 = [
                 '''(Elijah) - "I hope you will reconsider my offer." ''',
                 "You leave the massive log cabin and return to town."
@@ -265,6 +351,7 @@ def play():
     'key':'', 
     'player_name':''
     }
+    title()
     get_name(items)
     intro_story()
     town(items)
