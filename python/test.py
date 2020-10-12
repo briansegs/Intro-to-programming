@@ -33,7 +33,7 @@ def valid_input(promt, option1, option2):
             time_print("I don't understand.")
     return response
 
-def contine_reading():
+def contine_on():
     while True:
         response = input("Enter (1) to continue.\n").lower()
         if "1" in response:
@@ -43,72 +43,8 @@ def contine_reading():
 
 #<------------------------------------------------------------ Fight System ------------------------------------------------------------>    
 
-def boss_attack(items):    
-    if items['boss_name'] == 'Clover':
-        dmg = die_roll() + die_roll() 
-        items['player_hp'] -= dmg
-        lst = [
-            f"{items['boss_name']} thrust her hands out tward you, shouting *Primal Command*!, as a torrent of all 5 elements crash into you.",
-            f"{items['boss_name']} hits you for {dmg} damage.", 
-            f"your health is now at {items['player_hp']}"
-            ]
-        time_print_loop(lst)
-    else:
-        dmg = die_roll() * 2 
-        items['player_hp'] -= dmg
-        lst = [
-            f"{items['boss_name']} shouts *Banishing Light*! as a massive beam of light stricks you from the sky.",
-            f"{items['boss_name']} hits you for {dmg} damage.", 
-            f"your health is now at {items['player_hp']}\n"
-            ]
-        time_print_loop(lst)
-    if items['player_hp'] > 0:
-        answer = valid_input('Continue fighting or flee the battle?\n(1) Fight\n(2) Run\n', '1', '2')
-        if answer == "1":
-            time_print(f'''({items['player_name']}) "I will not give up!"''')
-            who_attacks(items)
-        elif answer == "2":
-            lst = [
-                f'''({items['player_name']}) "Im in over my head."''', 
-                f"{items['player_name']} runs from the battle and escapes {items['boss_name']}.", 
-                "You live to fight another day and return to town."
-                ]
-            time_print_loop(lst)
-            town(items)
-    else:
-        time_print('You have died!')
-        play_again()
-        
-def player_attack(items):
-    if items['boss_name'] == 'Clover':
-        dmg = die_roll() * 2
-    else:
-        dmg = die_roll() + die_roll() 
-    items['boss_hp'] -= dmg
-    lst = [
-        f"{items['player_name']} bolts toward {items['boss_name']}, shouting {items['key']}!, as he blast {items['boss_name']} with a punishing strike.",
-        f"You hit {items['boss_name']} for {dmg} damage points.",
-        f"{items['boss_name']}'s health is now at {items['boss_hp']}\n"
-        ]
-    time_print_loop(lst)
-    if items['boss_hp'] > 0:
-        time_print(f'''{items['boss_name']} - "Not bad!"''')
-        who_attacks(items)
-    else:
-        time_print('You have Won!')
-        play_again()
-        
-def who_attacks(items):    
-    result = coin_flip()
-    if result == 'heads':
-        player_attack(items)
-    elif result == 'tails':
-        boss_attack(items)
-    else:
-        who_attacks(items)
-
 def intro_fight():    
-    time_print('You are both still, waiting for the right time to make your move, and then...')
+    time_print('You are both still, waiting for the right time to make your move, and then...\n')
 
 
 def choose_stats(items):
@@ -127,7 +63,16 @@ def choose_stats(items):
     else:
         items.update(opt2)
     return items
-     
+
+def pick_who_attacks(items):    
+    result = coin_flip()
+    if result == 'heads':
+        player_turn(items)
+    elif result == 'tails':
+        boss_turn(items)
+    else:
+        pick_who_attacks(items)
+
 def play_again():
     time_print("Would you like to play again?")
     replay = valid_input("(1) Yes\n(2) No\n", "1", "2")
@@ -136,9 +81,91 @@ def play_again():
     elif replay == "2":
         time_print("Ok thanks for playing!")
 
+#<-------------------------------- Boss Functions -------------------------------->
+
+def dont_run(items):
+    time_print(f'''({items['player_name']}) "I will not give up!"\n''')
+    pick_who_attacks(items)
+
+def run(items):
+    lst = [
+        f'''({items['player_name']}) "Im in over my head."\n''', 
+        f"{items['player_name']} runs from the battle and escapes {items['boss_name']}.", 
+        "You live to fight another day and return to town.\n"
+        ]
+    time_print_loop(lst)
+    town(items)
+
+def clover_attacks(items):
+    dmg = die_roll() + die_roll() 
+    items['player_hp'] -= dmg
+    lst = [
+        f"{items['boss_name']} thrust her hands out tward you, shouting *Primal Command*!, as a torrent of all 5 elements crash into you.\n",
+        f"{items['boss_name']} hits you for {dmg} damage.", 
+        f"your health is now at {items['player_hp']}"
+        ]
+    time_print_loop(lst)
+    contine_on()
+
+def elijah_attacks(items):
+    dmg = die_roll() * 2 
+    items['player_hp'] -= dmg
+    lst = [
+        f"{items['boss_name']} shouts *Banishing Light*! as a massive beam of light stricks you from the sky.\n",
+        f"{items['boss_name']} hits you for {dmg} damage.", 
+        f"your health is now at {items['player_hp']}\n"
+        ]
+    time_print_loop(lst)
+    contine_on()
+
+def boss_turn(items):    
+    if items['boss_name'] == 'Clover':
+        clover_attacks(items)
+    else:
+        elijah_attacks(items)
+    if items['player_hp'] > 0:
+        answer = valid_input('Continue fighting or run away?\n(1) Fight\n(2) Run\n', '1', '2')
+        if answer == "1":
+            dont_run(items)
+        elif answer == "2":
+            run(items)
+    else:
+        time_print('You have died!')
+        play_again()
+        
+#<-------------------------------- Player Functions -------------------------------->
+
+def player_attack(items):
+    if items['boss_name'] == 'Clover':
+        dmg = die_roll() * 2
+    else:
+        dmg = die_roll() + die_roll() 
+    items['boss_hp'] -= dmg
+    lst = [
+        f"{items['player_name']} bolts toward {items['boss_name']}, shouting {items['key']}!, as he blast {items['boss_name']} with a punishing strike.\n",
+        f"You hit {items['boss_name']} for {dmg} damage points.",
+        f"{items['boss_name']}'s health is now at {items['boss_hp']}\n"
+        ]
+    time_print_loop(lst)
+    contine_on()
+
+def boss_taunt(items):
+    time_print(f'''({items['boss_name']}) "Not bad!"\n''')
+
+def player_turn(items):
+    player_attack(items)
+    if items['boss_hp'] > 0:
+        boss_taunt(items)
+        pick_who_attacks(items)
+    else:
+        time_print('You have Won!')
+        play_again()
+        
+#<----- Fight ----->
+
 def fight(items):
     intro_fight()
-    who_attacks(choose_stats(items))
+    pick_who_attacks(choose_stats(items))
 
 #<------------------------------------------------------------ Story ------------------------------------------------------------>
 
@@ -187,10 +214,11 @@ def intro_story():
     time_print_img(lst)        
     lst = ["At the peak of each holy mountain a great master resides.",
         "One has conquered the forces of nature.",
-        "The other manipulates spiritual energy.\n"
+        "The other manipulates spiritual energy.",
+        ""
         ]
     time_print_loop(lst)
-    contine_reading()
+    contine_on()
     lst = [
         "           )            _     / \ ",
         "   /\    ( _   _._     / \   /^  \ ",
@@ -206,8 +234,11 @@ def intro_story():
         "          ^^^^^ === ^^^^^^      ^^^   "
         ]
     time_print_img(lst)
-    time_print("After a much needed rest at the village inn, our hero sets out.\n")
-        
+    lst = [
+        "After a much needed rest at the village inn, our hero sets out.",
+        ""
+        ]
+    time_print_loop(lst)
 def get_location(items):
     lst = [
         f"What do you wan't to do {items['player_name']}?",
@@ -229,7 +260,7 @@ def town(items):
         town(items)
 
 #<-------------------------------- Clover Functions -------------------------------->
-def print_clover_house(items):
+def print_clover_house():
     lst = [
             "                                   /  \   .      ~         /\         `", 
             "  ~      /\      .            /\  /    \                  /`-\ ",
@@ -251,12 +282,18 @@ def print_clover_house(items):
     time_print_img(lst)
     
 def clover_offer(items):
-    print_clover_house(items)
+    print_clover_house()
     lst = [
         "Clover, brown-haired and slender, with bright, dark eyes, comes out to greet you.",
         "She peers curiously into you, sensing your kind heart...",
+        ""
+        ]
+    time_print_loop(lst)
+    contine_on()
+    lst = [
         f'''(Clover) "{items['player_name']}, I am the master you seek."''',
-        '''(Clover) "Train under me and unearth the secrets only I and Mother Nature know."\n''',
+        '''(Clover) "Train under me and unearth the secrets only I and Mother Nature know."''',
+        "",
         "Will you accept her offer?"
         ]
     time_print_loop(lst)
@@ -265,7 +302,8 @@ def clover_not_home(items):
     lst = [
         "Clover isn't home right now.",
         "There doesn't seem to be much to do here.",
-        "You head back into town.\n"
+        "You head back into town.",
+        ""
         ]
     time_print_loop(lst)
     town(items)
@@ -276,10 +314,11 @@ def clover_fight(items):
         "Clover, brown-haired and slender, with bright, dark eyes, comes out to greet you.",
         f"She notices {items['key']} in your possession and understands why you have come.",
         '''(Clover) "I will not be intimidated by one of Elijah's thugs!"''', 
-        "Clover twirls her hands in the air, forming a bright green aura around herself.\n"
+        "Clover twirls her hands in the air, forming a bright green aura around herself.",
+        ""
         ]
     time_print_loop(lst)
-    contine_reading()
+    contine_on()
     fight(items)
 
 def clover_training(items):
@@ -287,22 +326,26 @@ def clover_training(items):
         "For the next year you apprentice yourself to Clover, cultivating your skills.",
         "You pickup that a man named Elijah has been trying to steal Clover's power for many years.",
         "You promise Clover that you will bring an end to Elijah's reign of terror.",
-        "Clover is touched by your commitment.\n"
+        "Clover is touched by your commitment.",
+        ""
         ]
     time_print_loop(lst)
-    contine_reading()           
+    contine_on()           
     lst = [
         "To conclude your final day of training, Clover requests that you meet her infront of her house.",
         f'''(Clover) "{items['player_name']}, everything that you have endured was to prepare you for this."''',
         '''(Clover) "*Primal Command* is my greatest weapon and now it is yours."''',
-        f'''(Clover) "Remember your promise and good luck on your travels {items['player_name']}."\n'''
+        f'''(Clover) "Remember your promise and good luck on your travels {items['player_name']}."''',
+        ""
         ]
     time_print_loop(lst)
     items['key'] = '*Primal Command*'
-    contine_reading()
+    contine_on()
     lst = [
-        "You recieve *Primal Command!*\n",
+        "You recieve *Primal Command!*",
+        "",
         "With the training from Clover and the power of *Primal Command*, you leave and head into town.",
+        ""
         ]
     time_print_loop(lst)
     town(items)
@@ -310,7 +353,8 @@ def clover_training(items):
 def clover_turned_down(items):
     lst = [
         '''(Clover) "I hope you will reconsider my offer." ''',
-        "You leave the small house and return to town."
+        "You leave the small house and return to town.",
+        ""
         ]
     time_print_loop(lst)
     town(items)
@@ -320,7 +364,7 @@ def clover_turned_down(items):
 def clover(items):
     time_print("You find yourself in front of a small wooden house surrounded by tall grass and massive pine trees.")
     if items['key'] == '*Primal Command*':
-        clover_not_home()
+        clover_not_home(items)
     elif items['key'] == '*Banishing Light*':
         clover_fight(items)
     else:
@@ -333,7 +377,7 @@ def clover(items):
 
 #<-------------------------------- Elijah Functions -------------------------------->
 
-def print_elijah_house(items):
+def print_elijah_house():
     lst = [
                 
         "         .           .       (    )       *                *",
@@ -359,10 +403,16 @@ def print_elijah_house(items):
 def elijah_offer(items):
     print_elijah_house()
     lst = [
-        "Elijah, tall with powerful shoulders, and fierce blue eyes, comes out to greets you.",
+        "Elijah, tall with powerful shoulders, and fierce blue eyes, comes out to greet you.",
         "He sizes you up, feeling your desire for power...",
+        ""
+        ]
+    time_print_loop(lst)
+    contine_on()
+    lst = [
         f'''(Elijah) "{items['player_name']}, I am the master you seek."''',
-        '''(Elijah) "Take my guidence and uncover the limitless potential of the spirit relm."\n''',
+        '''(Elijah) "Take my guidence and uncover the limitless potential of the spirit relm."''',
+        "",
         "Will you accept his offer?"
         ]
     time_print_loop(lst)
@@ -371,7 +421,8 @@ def elijah_not_home(items):
     lst = [
         "Elijah isn't home right now.",
         "There doesn't seem to be much to do here.",
-        "You head back into town.\n"
+        "You head back into town.",
+        ""
         ]
     time_print_loop(lst)
     town(items)
@@ -382,10 +433,11 @@ def elijah_fight(items):
         "Elijah, tall with powerful shoulders, and fierce blue eyes, comes out to greets you.",
         f"He smiles at you and begins to glow bright red as he notices you possess {items['key']}.",
         f'''(Elijah) "I crave the power of {items['key']} and i will crush you to obtain it!"''', 
-        "Elijah gets into a fighting stance.\n"
+        "Elijah gets into a fighting stance.",
+        ""
         ]
     time_print_loop(lst)
-    contine_reading()
+    contine_on()
     fight(items)
 
 def elijah_training(items):
@@ -393,23 +445,27 @@ def elijah_training(items):
         "For the next year you memorize every mystical technique offerered to you by Elijah.",
         "Elijah shares his disire to increase his capabilities by defeating other masters and taking their power.",
         "He wants you to assist him and share the bounty, both of you becomming allpowerful.",
-        "Elijah feels that with you, his dreams can be realized.\n",
+        "Elijah feels that with you, his dreams can be realized.",
+        ""
         ]
     time_print_loop(lst)
-    contine_reading()    
+    contine_on()    
     lst = [    
         "To conclude your final day of training, Elijah requests that you meet him infront of his house.",
         f'''(Elijah) "{items['player_name']}, everything that you have encountered has prepare you for this."''',
         '''(Elijah) "*Banishing Light* is my greatest technique and now it is yours."''',
         f'''(Elijah) "{items['player_name']}, I want you to defeat a master named Clover to the east and take her power.''',
-        '''(Elijah) "Leave now and only return when you have completed your mission."\n'''
+        '''(Elijah) "Leave now and only return when you have completed your mission."''',
+        ""
         ]
     time_print_loop(lst)
-    contine_reading()
+    contine_on()
     items['key'] = '*Banishing Light*'
     lst = [
-        "You recieve *Banishing Light*\n",
-        "With the training from Elijah and the power of *Banishing Light*, you leave and head into town."
+        "You recieve *Banishing Light*",
+        "",
+        "With the training from Elijah and the power of *Banishing Light*, you leave and head into town.",
+        ""
         ]
     time_print_loop(lst)
     town(items)
@@ -417,7 +473,8 @@ def elijah_training(items):
 def elijah_turned_down(items):
     lst = [
         '''(Elijah) - "I hope you will reconsider my offer." ''',
-        "You leave the massive log cabin and return to town."
+        "You leave the sizable log cabin and return to town.",
+        ""
         ]
     time_print_loop(lst)
     town(items)
