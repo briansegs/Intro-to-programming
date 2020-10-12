@@ -140,6 +140,92 @@ def play_again():
         time_print("Ok thanks for playing!")
 # Story ------------------------------------------------------------>
 
+def print_clover_house(items):
+    lst = [
+            "                                   /  \   .      ~         /\         `", 
+            "  ~      /\      .            /\  /    \                  /`-\ ",
+            "        /  \       `   /\    /^ \/  ^   \      /\  *     /  ^ \  .",
+            "   .   / ^  \         / ^\  /  ^/  ^  )  \    /^ \      /  ^ ^ \ ",
+            "      /`     \     ` /  ^ \/^ ^/^   (     \  /  ^ \    /      ^ \ ",
+            "     /    ^   \~    / ^   /  ^/ ^ ^ ) ) ^  \/  ^^  \  / ^      `_\ ",
+            "    /^  ^   `  \   / ^ ^   ^ / ^  (  ( ^   / ^   ^  \/`   ^       \ ",     
+            "   /     ^ ^    \ /  ^ ^ ^^ / ^  (____) ^ /       ^ /     ^ ^   ^  \ ",
+            "  /`   ^ ^  ^    \    ^  ^  ______|__|_____^ ^     / ^-    ^      ^ \ ",
+            " / `'     ^     `-\     ^  /_______________\ ^ ^  / ^    ``     `-   \ ",
+            "/     ^  ^^   ^   ^\^     /_________________\  ^ /  ^  ^^     ^       \ ", 
+            "  -^ ^  ^ ^^-     ^ \^  ^  ||||||   |||__|||    /`-  ^  ^ ^^^   ^^-    \ ",       
+            "        | |                ||||||I  |||__|||              | |    ",
+            "||||||| [ ] |||||||||||||| ||||||___|||||||| |||||||||||| [ ] |||||||||| ", 
+            '""""""""""""""""""""""""""""""""===="""""""""""""""""""""""""""""""""""""" ',
+            "    |||||||||||||||||||||||||||=====|||||||||||||||||||||||||||||||| "   
+            ]
+    time_print_img(lst)
+    
+def clover_offer(items):
+    print_clover_house(items)
+    lst = [
+        "Clover, brown-haired and slender, with bright, dark eyes, comes out to greet you.",
+        "She peers curiously into you, sensing your kind heart...",
+        f'''(Clover) "{items['player_name']}, I am the master you seek."''',
+        '''(Clover) "Train under me and unearth the secrets only I and Mother Nature know."\n''',
+        "Will you accept her offer?"
+        ]
+    time_print_loop(lst)
+
+def clover_not_home(items):
+    lst = [
+        "Clover isn't home right now.",
+        "There doesn't seem to be much to do here.",
+        "You head back into town.\n"
+        ]
+    time_print_loop(lst)
+    town(items)
+
+def clover_fight(items):
+    print_clover_house()
+    lst = [
+        "Clover, brown-haired and slender, with bright, dark eyes, comes out to greet you.",
+        f"She notices {items['key']} in your possession and understands why you have come.",
+        '''(Clover) "I will not be intimidated by one of Elijah's thugs!"''', 
+        "Clover twirls her hands in the air, forming a bright green aura around herself.\n"
+        ]
+    time_print_loop(lst)
+    contine_reading()
+    fight(items)
+
+def clover_training(items):
+    lst = [
+        "For the next year you apprentice yourself to Clover, cultivating your skills.",
+        "You pickup that a man named Elijah has been trying to steal Clover's power for many years.",
+        "You promise Clover that you will bring an end to Elijah's reign of terror.",
+        "Clover is touched by your commitment.\n"
+        ]
+    time_print_loop(lst)
+    contine_reading()           
+    lst = [
+        "To conclude your final day of training, Clover requests that you meet her infront of her house.",
+        f'''(Clover) "{items['player_name']}, everything that you have endured was to prepare you for this."''',
+        '''(Clover) "*Primal Command* is my greatest weapon and now it is yours."''',
+        f'''(Clover) "Remember your promise and good luck on your travels {items['player_name']}."\n'''
+        ]
+    time_print_loop(lst)
+    items['key'] = '*Primal Command*'
+    contine_reading()
+    lst = [
+        "You recieve *Primal Command!*\n",
+        "With the training from Clover and the power of *Primal Command*, you leave and head into town.",
+        ]
+    time_print_loop(lst)
+    town(items)
+
+def clover_turned_down(items):
+    lst = [
+        '''(Clover) "I hope you will reconsider my offer." ''',
+        "You leave the small house and return to town."
+        ]
+    time_print_loop(lst)
+    town(items)
+
 def title():
     lst = [
         "         ,--.",                                                                                                                           
@@ -204,11 +290,11 @@ def intro_story():
         "          ^^^^^ === ^^^^^^      ^^^   "
         ]
     time_print_img(lst)
-    time_print("After a much needed rest in the village inn, our hero sets out.\n")
+    time_print("After a much needed rest at the village inn, our hero sets out.\n")
         
      
 
-def location(items):
+def get_location(items):
     lst = [
         f"What do you wan't to do {items['player_name']}?",
         "(1) Traverse the wooded mountain to the east.",
@@ -218,7 +304,7 @@ def location(items):
     return number
 
 def town(items):
-    choice = location(items)
+    choice = get_location(items)
     if choice == '1':
         clover(items)
     elif choice == '2':
@@ -229,102 +315,16 @@ def town(items):
 def clover(items):
     time_print("You find yourself in front of a small wooden house surrounded by tall grass and massive pine trees.")
     if items['key'] == '*Primal Command*':
-        lst = [
-            "Clover isn't home right now.",
-            "There doesn't seem to be much to do here.",
-            "You head back into town.\n"
-            ]
-        time_print_loop(lst)
-        town(items)
+        clover_not_home()
     elif items['key'] == '*Banishing Light*':
-        lst = [
-            "                                   /  \   .      ~         /\         `", 
-            "  ~      /\      .            /\  /    \                  /`-\ ",
-            "        /  \       `   /\    /^ \/  ^   \      /\  *     /  ^ \  .",
-            "   .   / ^  \         / ^\  /  ^/  ^  )  \    /^ \      /  ^ ^ \ ",
-            "      /`     \     ` /  ^ \/^ ^/^   (     \  /  ^ \    /      ^ \ ",
-            "     /    ^   \~    / ^   /  ^/ ^ ^ ) ) ^  \/  ^^  \  / ^      `_\ ",
-            "    /^  ^   `  \   / ^ ^   ^ / ^  (  ( ^   / ^   ^  \/`   ^       \ ",     
-            "   /     ^ ^    \ /  ^ ^ ^^ / ^  (____) ^ /       ^ /     ^ ^   ^  \ ",
-            "  /`   ^ ^  ^    \    ^  ^  ______|__|_____^ ^     / ^-    ^      ^ \ ",
-            " / `'     ^     `-\     ^  /_______________\ ^ ^  / ^    ``     `-   \ ",
-            "/     ^  ^^   ^   ^\^     /_________________\  ^ /  ^  ^^     ^       \ ", 
-            "  -^ ^  ^ ^^-     ^ \^  ^  ||||||   |||__|||    /`-  ^  ^ ^^^   ^^-    \ ",       
-            "        | |                ||||||I  |||__|||              | |    ",
-            "||||||| [ ] |||||||||||||| ||||||___|||||||| |||||||||||| [ ] |||||||||| ", 
-            '""""""""""""""""""""""""""""""""===="""""""""""""""""""""""""""""""""""""" ',
-            "    |||||||||||||||||||||||||||=====|||||||||||||||||||||||||||||||| "   
-            ]
-        time_print_img(lst)
-        lst = [
-            "Clover, brown-haired and slender, with bright, dark eyes, comes out to greet you.",
-            f"She notices {items['key']} in your possession and understands why you have come.",
-            '''(Clover) "I will not be intimidated by one of Elijah's thugs!"''', 
-            "Clover twirls her hands in the air, forming a bright green aura around herself.\n"
-            ]
-        time_print_loop(lst)
-        contine_reading()
-        fight(items)
+        clover_fight()
     else:
-        lst = [
-            "                                   /  \   .      ~         /\         `", 
-            "  ~      /\      .            /\  /    \                  /`-\ ",
-            "        /  \       `   /\    /^ \/  ^   \      /\  *     /  ^ \  .",
-            "   .   / ^  \         / ^\  /  ^/  ^  )  \    /^ \      /  ^ ^ \ ",
-            "      /`     \     ` /  ^ \/^ ^/^   (     \  /  ^ \    /      ^ \ ",
-            "     /    ^   \~    / ^   /  ^/ ^ ^ ) ) ^  \/  ^^  \  / ^      `_\ ",
-            "    /^  ^   `  \   / ^ ^   ^ / ^  (  ( ^   / ^   ^  \/`   ^       \ ",     
-            "   /     ^ ^    \ /  ^ ^ ^^ / ^  (____) ^ /       ^ /     ^ ^   ^  \ ",
-            "  /`   ^ ^  ^    \    ^  ^  ______|__|_____^ ^     / ^-    ^      ^ \ ",
-            " / `'     ^     `-\     ^  /_______________\ ^ ^  / ^    ``     `-   \ ",
-            "/     ^  ^^   ^   ^\^     /_________________\  ^ /  ^  ^^     ^       \ ", 
-            "  -^ ^  ^ ^^-     ^ \^  ^  ||||||   |||__|||    /`-  ^  ^ ^^^   ^^-    \ ",       
-            "        | |                ||||||I  |||__|||              | |    ",
-            "||||||| [ ] |||||||||||||| ||||||___|||||||| |||||||||||| [ ] |||||||||| ", 
-            '""""""""""""""""""""""""""""""""===="""""""""""""""""""""""""""""""""""""" ',
-            "    |||||||||||||||||||||||||||=====|||||||||||||||||||||||||||||||| "   
-            ]
-        time_print_img(lst)
-        lst = [
-            "Clover, brown-haired and slender, with bright, dark eyes, comes out to greet you.",
-            "She peers curiously into you, sensing your kind heart...",
-            f'''(Clover) "{items['player_name']}, I am the master you seek."''',
-            '''(Clover) "Train under me and unearth the secrets only I and Mother Nature know."\n''',
-            "Will you accept her offer?"
-            ]
-        time_print_loop(lst)
+        clover_offer(items)
         answer = valid_input("(1) Yes\n(2) No\n", "1", "2")
         if answer == "1":
-            lst = [
-                "For the next year you apprentice yourself to Clover, cultivating your skills.",
-                "You pickup that a man named Elijah has been trying to steal Clover's power for many years.",
-                "You promise Clover that you will bring an end to Elijah's reign of terror.",
-                "Clover is touched by your commitment.\n"
-                ]
-            time_print_loop(lst)
-            contine_reading()           
-            lst = [
-                "To conclude your final day of training, Clover requests that you meet her infront of her house.",
-                f'''(Clover) "{items['player_name']}, everything that you have endured was to prepare you for this."''',
-                '''(Clover) "*Primal Command* is my greatest weapon and now it is yours."''',
-                f'''(Clover) "Remember your promise and good luck on your travels {items['player_name']}."\n'''
-                ]
-            time_print_loop(lst)
-            items['key'] = '*Primal Command*'
-            contine_reading()
-            lst = [
-                "You recieve *Primal Command!*\n",
-                "With the training from Clover and the power of *Primal Command*, you leave and head into town.",
-                ]
-            time_print_loop(lst)
-            town(items)
+            clover_training(items)
         elif answer == "2":
-            lst = [
-                '''(Clover) "I hope you will reconsider my offer." ''',
-                "You leave the small house and return to town."
-                ]
-            time_print_loop(lst)
-            town(items)
+            clover_turned_down()
 
 def elijah(items):
     time_print("You find yourself in front of a sizable log cabin surrounded by odd stone sculpturs, both covered in snow.")
