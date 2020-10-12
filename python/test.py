@@ -317,14 +317,14 @@ def clover(items):
     if items['key'] == '*Primal Command*':
         clover_not_home()
     elif items['key'] == '*Banishing Light*':
-        clover_fight()
+        clover_fight(items)
     else:
         clover_offer(items)
         answer = valid_input("(1) Yes\n(2) No\n", "1", "2")
         if answer == "1":
             clover_training(items)
         elif answer == "2":
-            clover_turned_down()
+            clover_turned_down(items)
 
 def elijah(items):
     time_print("You find yourself in front of a sizable log cabin surrounded by odd stone sculpturs, both covered in snow.")
