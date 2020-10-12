@@ -11,18 +11,14 @@ def time_print(string):
     print(string)
     time.sleep(2)
 
-def time_print_1(string):
-    print(string)
-    time.sleep(.5)
-
-
 def time_print_loop(lst):
     for i in range(len(lst)):
         time_print(lst[i])
 
-def time_print_loop_1(lst):
+def time_print_img(lst):
     for i in range(len(lst)):
-        time_print_1(lst[i])
+        print(lst[i])
+        time.sleep(.5)
 
 def valid_input(promt, option1, option2):
     while True:
@@ -34,6 +30,16 @@ def valid_input(promt, option1, option2):
         else:
             time_print("Sorry, I don't understand.")
     return response
+
+def contine_reading():
+    while True:
+        response = input("Enter (1) to continue.\n").lower()
+        if "1" in response:
+            break
+        else:
+            time_print("I don't understand.")
+
+# Fight System ------------------------------------------------------------>    
 
 def boss_attack(items):    
     if items['boss_name'] == 'Clover':
@@ -145,15 +151,15 @@ def title():
         "|   : '  '; | /       \ |  |   ,'|  |   ,'.   ; ,. :    /___/ \: |        \   ;  \ ' |  /       \ '  | |  '  | |     /     \    /_ ./|",  
         "'   ' ;.    ;.--.  .-. |'  :  /  '  :  /  '   | |: : .-'.. '   ' .         \   \  \: | .--.  .-. ||  | :  |  | :    /    /  |, ' , ' :",  
         "|   | | \   | \__\/: . .|  | '   |  | '   '   | .; :/___/ \:     '          ;   \  ' .  \__\/: . .'  : |__'  : |__ .    ' / /___/ \: |",  
-        "'   : |  ; .' ,' .--.; |;  : |   ;  : |   |   :    |.   \  ' .\              \   \   '  ,' .--.; ||  | '.'|  | '.'|'   ;   /|.  \  ' |",  
+        "'   : |  ; .' ,' .--.; |;  : |   ;  : |   |   :    |.   \  ' .\  |           \   \   '  ,' .--.; ||  | '.'|  | '.'|'   ;   /|.  \  ' |",  
         "|   | '`--'  /  /  ,.  ||  , ;   |  , ;    \   \  /  \   \   ' \ |            \   `  ; /  /  ,.  |;  :    ;  :    ;'   |  / | \  ;   :",  
         "'   : |     ;  :   .'   \---'     ---'      `----'    \   \  |--'              :   \ |;  :   .'   \  ,   /|  ,   / |   :    |  \  \  ;",  
-        ";   |.'     |  ,     .-./                              \   \ |                  '---' |  ,     .-./---`-'  ---`-'   \   \  /    :  \  \.", 
+        ";   |.'     |  ,     .-./                              \   \ |                  '---' |  ,     .-./---`-'  ---`-'   \   \  /    :  \  \ ", 
         "'---'        `--`---'                                   '---'                          `--`---'                      `----'      \  ' ;", 
         "                                                                                                                                  `--`", 
                                                                                                                                     
         ]
-    time_print_loop_1(lst)
+    time_print_img(lst)
 
 def get_name(items):
     items['player_name'] = input("To start enter your name\n")
@@ -171,16 +177,18 @@ def intro_story():
         "      /    \  /\ '  \*           _/  /  \  *'.",
         " .   /\/\  /\/ :' __ \_      _ /   ^/_   `--.",
         "    /    \/  \  _/  \-'\    /   ^ _   \_ ^ .'\  *",
-        "  /\  .-   `. \/     \ /====`.  _/ \  ^ `_/   \.",
-        " /  `-.__ `   / .-'.--\ ====/ ^  `--./ .-'  `- ^",
-        "/        `.  / /       `.====.-' ^    '-._ `._  `-"
+        "  /\  .-   `. \/     \ /''' `.  _/ \  ^ `_/   \.",
+        " /  `-.__ `   / .-'.--\ ''' / ^  `--./ .-'  `- ^",
+        "/        `.  / /       `.''' .-' ^    '-._ `._  `-",
+        "                          ''' "
         ]
-    time_print_loop_1(lst)        
+    time_print_img(lst)        
     lst = ["At the peak of each holy mountain a great master resides.",
         "One has conquered the forces of nature.",
-        "The other manipulates spiritual energy."
+        "The other manipulates spiritual energy.\n"
         ]
     time_print_loop(lst)
+    contine_reading()
     lst = [
         "           )            _     / \ ",
         "   /\    ( _   _._     / \   /^  \ ",
@@ -193,9 +201,9 @@ def intro_story():
         "    |  [___]   | .|  [___]  |  <inn>",
         "    |________  |__|  _______|    |",
         "^^^^^^^^^^^^^^^ === ^^^^^^^^^^^^^|^^ ",
-        "                ===   "
+        "          ^^^^^ === ^^^^^^      ^^^   "
         ]
-    time_print_loop_1(lst)
+    time_print_img(lst)
     time_print("After a much needed rest in the village inn, our hero sets out.\n")
         
      
@@ -219,7 +227,7 @@ def town(items):
         town(items)
     
 def clover(items):
-    time_print("You find yourself in front of a small wooden house surrounded by tall grass and massive oak trees.")
+    time_print("You find yourself in front of a small wooden house surrounded by tall grass and massive pine trees.")
     if items['key'] == '*Primal Command*':
         lst = [
             "Clover isn't home right now.",
@@ -230,14 +238,53 @@ def clover(items):
         town(items)
     elif items['key'] == '*Banishing Light*':
         lst = [
-            "Clover comes out to greet you and notices *Banishing Light* in your possession.",
-            "She understands why you have come.",
+            "                                   /  \   .      ~         /\         `", 
+            "  ~      /\      .            /\  /    \                  /`-\ ",
+            "        /  \       `   /\    /^ \/  ^   \      /\  *     /  ^ \  .",
+            "   .   / ^  \         / ^\  /  ^/  ^  )  \    /^ \      /  ^ ^ \ ",
+            "      /`     \     ` /  ^ \/^ ^/^   (     \  /  ^ \    /      ^ \ ",
+            "     /    ^   \~    / ^   /  ^/ ^ ^ ) ) ^  \/  ^^  \  / ^      `_\ ",
+            "    /^  ^   `  \   / ^ ^   ^ / ^  (  ( ^   / ^   ^  \/`   ^       \ ",     
+            "   /     ^ ^    \ /  ^ ^ ^^ / ^  (____) ^ /       ^ /     ^ ^   ^  \ ",
+            "  /`   ^ ^  ^    \    ^  ^  ______|__|_____^ ^     / ^-    ^      ^ \ ",
+            " / `'     ^     `-\     ^  /_______________\ ^ ^  / ^    ``     `-   \ ",
+            "/     ^  ^^   ^   ^\^     /_________________\  ^ /  ^  ^^     ^       \ ", 
+            "  -^ ^  ^ ^^-     ^ \^  ^  ||||||   |||__|||    /`-  ^  ^ ^^^   ^^-    \ ",       
+            "        | |                ||||||I  |||__|||              | |    ",
+            "||||||| [ ] |||||||||||||| ||||||___|||||||| |||||||||||| [ ] |||||||||| ", 
+            '""""""""""""""""""""""""""""""""===="""""""""""""""""""""""""""""""""""""" ',
+            "    |||||||||||||||||||||||||||=====|||||||||||||||||||||||||||||||| "   
+            ]
+        time_print_img(lst)
+        lst = [
+            "Clover, brown-haired and slender, with bright, dark eyes, comes out to greet you.",
+            f"She notices {items['key']} in your possession and understands why you have come.",
             '''(Clover) "I will not be intimidated by one of Elijah's thugs!"''', 
             "Clover twirls her hands in the air, forming a bright green aura around herself.\n"
             ]
         time_print_loop(lst)
+        contine_reading()
         fight(items)
     else:
+        lst = [
+            "                                   /  \   .      ~         /\         `", 
+            "  ~      /\      .            /\  /    \                  /`-\ ",
+            "        /  \       `   /\    /^ \/  ^   \      /\  *     /  ^ \  .",
+            "   .   / ^  \         / ^\  /  ^/  ^  )  \    /^ \      /  ^ ^ \ ",
+            "      /`     \     ` /  ^ \/^ ^/^   (     \  /  ^ \    /      ^ \ ",
+            "     /    ^   \~    / ^   /  ^/ ^ ^ ) ) ^  \/  ^^  \  / ^      `_\ ",
+            "    /^  ^   `  \   / ^ ^   ^ / ^  (  ( ^   / ^   ^  \/`   ^       \ ",     
+            "   /     ^ ^    \ /  ^ ^ ^^ / ^  (____) ^ /       ^ /     ^ ^   ^  \ ",
+            "  /`   ^ ^  ^    \    ^  ^  ______|__|_____^ ^     / ^-    ^      ^ \ ",
+            " / `'     ^     `-\     ^  /_______________\ ^ ^  / ^    ``     `-   \ ",
+            "/     ^  ^^   ^   ^\^     /_________________\  ^ /  ^  ^^     ^       \ ", 
+            "  -^ ^  ^ ^^-     ^ \^  ^  ||||||   |||__|||    /`-  ^  ^ ^^^   ^^-    \ ",       
+            "        | |                ||||||I  |||__|||              | |    ",
+            "||||||| [ ] |||||||||||||| ||||||___|||||||| |||||||||||| [ ] |||||||||| ", 
+            '""""""""""""""""""""""""""""""""===="""""""""""""""""""""""""""""""""""""" ',
+            "    |||||||||||||||||||||||||||=====|||||||||||||||||||||||||||||||| "   
+            ]
+        time_print_img(lst)
         lst = [
             "Clover, brown-haired and slender, with bright, dark eyes, comes out to greet you.",
             "She peers curiously into you, sensing your kind heart...",
@@ -248,31 +295,39 @@ def clover(items):
         time_print_loop(lst)
         answer = valid_input("(1) Yes\n(2) No\n", "1", "2")
         if answer == "1":
-            lst1 = [
+            lst = [
                 "For the next year you apprentice yourself to Clover, cultivating your skills.",
                 "You pickup that a man named Elijah has been trying to steal Clover's power for many years.",
                 "You promise Clover that you will bring an end to Elijah's reign of terror.",
-                "Clover is touched by your commitment.\n",
+                "Clover is touched by your commitment.\n"
+                ]
+            time_print_loop(lst)
+            contine_reading()           
+            lst = [
                 "To conclude your final day of training, Clover requests that you meet her infront of her house.",
                 f'''(Clover) "{items['player_name']}, everything that you have endured was to prepare you for this."''',
                 '''(Clover) "*Primal Command* is my greatest weapon and now it is yours."''',
-                f'''(Clover) "Remember your promise and good luck on your travels {items['player_name']}."\n''',
-                "You recieve *Primal Command*\n"
+                f'''(Clover) "Remember your promise and good luck on your travels {items['player_name']}."\n'''
                 ]
-            time_print_loop(lst1)
+            time_print_loop(lst)
             items['key'] = '*Primal Command*'
-            time_print("With the training from Clover and the power of *Primal Command*, you leave and head into town.")
+            contine_reading()
+            lst = [
+                "You recieve *Primal Command!*\n",
+                "With the training from Clover and the power of *Primal Command*, you leave and head into town.",
+                ]
+            time_print_loop(lst)
             town(items)
         elif answer == "2":
-            lst2 = [
+            lst = [
                 '''(Clover) "I hope you will reconsider my offer." ''',
                 "You leave the small house and return to town."
                 ]
-            time_print_loop(lst2)
+            time_print_loop(lst)
             town(items)
 
 def elijah(items):
-    time_print("You find yourself in front of a massive log cabin surrounded by aged stone sculpturs, both covered in snow.")
+    time_print("You find yourself in front of a sizable log cabin surrounded by odd stone sculpturs, both covered in snow.")
     if items['key'] == '*Banishing Light*':
         lst = [
             "Elijah isn't home right now.",
@@ -283,12 +338,34 @@ def elijah(items):
         town(items)
     elif items['key'] == '*Primal Command*':
         lst = [
-            f"Elijah comes out to greet you and notices you possess {items['key']}.",
-            "He smiles at you and begins to glow bright red.",
-            '''(Elijah) "I crave the power of *Primal Command* and i will crush you to obtain it!"''', 
+                
+            "         .           .       (    )       *                *",
+            "    *                          )  )",
+            "        .                     (  (              .      /\ ",
+            "                           .   (_)                    /  \  /\ ",
+            "      *       *     ___________[_]___________      /\/    \/  \ ",
+            "           /\      /\   *       ______    *  \    /   /\/\  /\/\ ",
+            "          /  \    //_\          \    /\       \  /\/\/    \/    \ ",
+            "   /\    / /\/\  //___\       *  \__/  \  .    \/       *",
+            "  /  \  /\/*   \//_____\          \ |[]|        \ ",
+            " /\/\/\/       //_______\          \|__|         \           .",
+            "/   __ \      /XXXXXXXXXX\                        \       __",
+            "   /  \ \    /_I_I___I__I_\________________________\     /  \ ",
+            "  { () }       I_I   I__I_________[]_|_[]_________I     ( () )",
+            "   (  )  /\    I_II  I__I_________[]_|_[]_________I      (  )",
+            "    []  (  )   I I___I  I         XXXXXXX    /\   I       []",
+            " ~~~[] ~~[] ~~~~~____~~~~~~~~~~~~~~~~~~~~~~~{  }~~~~~~~~~~[] ~~~~~",
+            "          ~~~~~~_____~~~~~~~~~~      ~~~~~~~~[] ~~~~~~~~~"
+            ]
+        time_print_img(lst)
+        lst = [
+            "Elijah, tall with powerful shoulders, and fierce blue eyes, comes out to greets you.",
+            f"He smiles at you and begins to glow bright red as he notices you possess {items['key']}.",
+            f'''(Elijah) "I crave the power of {items['key']} and i will crush you to obtain it!"''', 
             "Elijah gets into a fighting stance.\n"
             ]
         time_print_loop(lst)
+        contine_reading()
         fight(items)
     else:
         lst = [
@@ -304,14 +381,14 @@ def elijah(items):
             "  /  \  /\/*   \//_____\          \ |[]|        \ ",
             " /\/\/\/       //_______\          \|__|         \           .",
             "/   __ \      /XXXXXXXXXX\                        \       __",
-            "   /  \ \    /_I_I   I__I_\________________________\     /  \ ",
+            "   /  \ \    /_I_I___I__I_\________________________\     /  \ ",
             "  { () }       I_I   I__I_________[]_|_[]_________I     ( () )",
             "   (  )  /\    I_II  I__I_________[]_|_[]_________I      (  )",
-            "    []  (  )   I I___I  I         XXXXXXX         I       []",
-            " ~~~[] ~~[] ~~~~~____ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [] ~~~~~",
-            "                ~~~~~"
+            "    []  (  )   I I___I  I         XXXXXXX    /\   I       []",
+            " ~~~[] ~~[] ~~~~~____~~~~~~~~~~~~~~~~~~~~~~~{  }~~~~~~~~~~[] ~~~~~",
+            "          ~~~~~~_____~~~~~~~~~~      ~~~~~~~~[] ~~~~~~~~~"
             ]
-        time_print_loop_1(lst)
+        time_print_img(lst)
         lst = [
             "Elijah, tall with powerful shoulders, and fierce blue eyes, comes out to greets you.",
             "He sizes you up, feeling your desire for power...",
@@ -322,28 +399,36 @@ def elijah(items):
         time_print_loop(lst)
         answer = valid_input("(1) Yes\n(2) No\n", "1", "2")
         if answer == "1":
-            lst1 = [
+            lst = [
                 "For the next year you memorize every mystical technique offerered to you by Elijah.",
                 "Elijah shares his disire to increase his capabilities by defeating other masters and taking their power.",
                 "He wants you to assist him and share the bounty, both of you becomming allpowerful.",
                 "Elijah feels that with you, his dreams can be realized.\n",
+                ]
+            time_print_loop(lst)
+            contine_reading()    
+            lst = [    
                 "To conclude your final day of training, Elijah requests that you meet him infront of his house.",
                 f'''(Elijah) "{items['player_name']}, everything that you have encountered has prepare you for this."''',
                 '''(Elijah) "*Banishing Light* is my greatest technique and now it is yours."''',
                 f'''(Elijah) "{items['player_name']}, I want you to defeat a master named Clover to the east and take her power.''',
-                '''(Elijah) "Leave now and only return when you have completed your mission."\n''',
-                "You recieve *Banishing Light*\n"
+                '''(Elijah) "Leave now and only return when you have completed your mission."\n'''
                 ]
-            time_print_loop(lst1)
+            time_print_loop(lst)
+            contine_reading()
             items['key'] = '*Banishing Light*'
-            time_print("With the training from Elijah and the power of *Banishing Light*, you leave and head into town.")
+            lst = [
+                "You recieve *Banishing Light*\n",
+                "With the training from Elijah and the power of *Banishing Light*, you leave and head into town."
+                ]
+            time_print_loop(lst)
             town(items)
         elif answer == "2":
-            lst2 = [
+            lst = [
                 '''(Elijah) - "I hope you will reconsider my offer." ''',
                 "You leave the massive log cabin and return to town."
                 ]
-            time_print_loop(lst2)
+            time_print_loop(lst)
             town(items)
 
 def play():
