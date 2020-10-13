@@ -298,7 +298,22 @@ def print_clover_house():
             "    |||||||||||||||||||||||||||=====|||||||||||||||||||||||||||||||| "   
             ]
     time_print_img(lst)
-    
+
+def print_primal_command():
+    lst = [
+        "       ... ",  
+        "    :::;(;::: ", 
+        " .::;.) );:::::. ", 
+        ":::;`(,' (,;::::: ", 
+        ":::;;) .-. (';::: ", 
+        ":::;( ( * )'):;:: ", 
+        "'::;`),'-' (;::' ",  
+        "  ':(____),_)::' ",     
+        "    |_______| ",
+        "     \_____/ ",      
+        ]
+    time_print_img(lst)
+
 def clover_offer(items):
     print_clover_house()
     lst = [
@@ -351,7 +366,11 @@ def clover_training(items):
     contine_on()           
     lst = [
         "To conclude your final day of training, Clover requests that you meet her infront of her house.",
-        f'''(Clover) "{items['player_name']}, everything that you have endured was to prepare you for this."''',
+        f'''(Clover) "{items['player_name']}, everything that you have endured was to prepare you for this."'''
+        ]
+    time_print_loop(lst)
+    print_primal_command()
+    lst = [
         '''(Clover) "*Primal Command* is my greatest weapon and now it is yours."''',
         f'''(Clover) "Remember your promise and good luck on your travels {items['player_name']}."''',
         ""
@@ -418,6 +437,21 @@ def print_elijah_house():
         ]
     time_print_img(lst)
 
+def print_banishing_light():
+    lst = [
+        "         ( ",    
+        "   )    )\(   . ",
+        "  (( `.((_))  )) ",
+        "  ,\`.'    `-',' ",
+        " `.)    /\    (,') ",
+        " ,',   (  )   '._,) ",
+        "((  )   ''   (`--' ",
+        " `'( ) _--_,-.\ ' ",
+        "  ' /,' \( )) `') ",
+        "    (    `\( ",
+        "           ) "
+        ]
+    time_print_img(lst)
 def elijah_offer(items):
     print_elijah_house()
     lst = [
@@ -471,6 +505,10 @@ def elijah_training(items):
     lst = [    
         "To conclude your final day of training, Elijah requests that you meet him infront of his house.",
         f'''(Elijah) "{items['player_name']}, everything that you have encountered has prepare you for this."''',
+        ]
+    time_print_loop(lst)
+    print_banishing_light()
+    lst = [
         '''(Elijah) "*Banishing Light* is my greatest technique and now it is yours."''',
         f'''(Elijah) "{items['player_name']}, I want you to defeat a master named Clover to the east and take her power.''',
         '''(Elijah) "Leave now and only return when you have completed your mission."''',
