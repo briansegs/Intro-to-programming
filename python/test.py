@@ -172,12 +172,13 @@ def boss_turn(items):
         
 #<-------------------------------- Player Functions -------------------------------->
 
-def attack_shout(items):
+def player_attack_shout(items):
     lst = [
-        f"{items['player_name']} bolts toward {items['boss_name']}, shouting {items['key']}!, as he blast {items['boss_name']} with a punishing strike.",
+        f"{items['player_name']} bolts toward {items['boss_name']}, shouting {items['key']}!, as he blasted {items['boss_name']} with a punishing strike.",
         f"With outstretched arms and palms aimed at {items['boss_name']}, {items['player_name']} shouts {items['key']}! and hammers {items['boss_name']} with a powerful blow."
         f"Shouting {items['key']}!, {items['player_name']} releases a mighy force that smashes {items['boss_name']}."
         ]
+    time_print(random.choice(lst))
 
 def player_attack(items):
     if items['boss_name'] == 'Clover':
@@ -185,8 +186,8 @@ def player_attack(items):
     else:
         dmg = die_roll() + die_roll() 
     items['boss_hp'] -= dmg
+    player_attack_shout(items)
     lst = [
-        f"{items['player_name']} bolts toward {items['boss_name']}, shouting {items['key']}!, as he blast {items['boss_name']} with a punishing strike.",
         "",
         f"You hit {items['boss_name']} for {dmg} damage points.",
         f"{items['boss_name']}'s health is now at {items['boss_hp']}",
@@ -205,31 +206,34 @@ def boss_taunt(items):
         ]
     time_print(f'''({items['boss_name']}) "{random.choice(taunts)}"\n''')
 
+def winner_endings(items):
+    time_print('You have Won!')
+    if items['boss_name'] == 'Elijah':
+        lst = [
+            "Keeping your promise to Clover, you made the world safe from Elijah and his menacing.",
+            "A new journey is in front of you.",
+            f"Good people might need your assistance and the power of {items['key']}.",
+            "You leave the narrow valley, never to return."
+            ]
+        time_print_loop(lst)
+    elif items['boss_name'] == 'Clover':
+        lst = [
+            "You have completed the task given to you by Elijah and dispatched Clover.",
+            "Attainment of *Primal Command* doubles your power and desire for more.",
+            "You return to Elijah and plot with him to find more prey.",
+            "You two leave the narrow valley, never to return."
+            ]
+        time_print_loop(lst)
+
 def player_turn(items):
     player_attack(items)
     if items['boss_hp'] > 0:
         boss_taunt(items)
         pick_who_attacks(items)
     else:
-        time_print('You have Won!')
-        if items['boss_name'] == 'Elijah':
-            lst = [
-                "Keeping your promise to Clover, you made the world safe from Elijah and his menacing.",
-                "A new journey is in front of you.",
-                f"Good people might need your assistance and the power of {items['key']}.",
-                "You leave the narrow valley, never to return."
-                ]
-            time_print_loop(lst)
-            play_again()
-        elif items['boss_name'] == 'Clover':
-            lst = [
-                "You have completed the task given to you by Elijah and dispatched Clover.",
-                "Attainment of *Primal Command* doubles your power and desire for more.",
-                "You return to Elijah and plot with him to find more prey.",
-                "You two leave the narrow valley, never to return."
-                ]
-            time_print_loop(lst)
-            play_again()
+        winner_endings(items)
+        play_again()
+            
         
         
 #<----- Fight ----->
@@ -543,7 +547,7 @@ def elijah_not_home(items):
 def elijah_fight(items):
     print_elijah_house()
     lst = [
-        "Elijah, tall with powerful shoulders, and fierce blue eyes, comes out to greets you.",
+        "Elijah, tall with powerful shoulders, and fierce blue eyes, comes out to greet you.",
         f"He smiles at you and begins to glow bright red as he notices you possess {items['key']}.",
         ""
         ]
