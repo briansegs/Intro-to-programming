@@ -49,13 +49,13 @@ def intro_fight():
 
 def choose_stats(items):
     opt1 = {
-        'boss_hp': 10, 
-        'player_hp': 10,
+        'boss_hp': 15, 
+        'player_hp': 15,
         'boss_name': 'Elijah'
         }
     opt2 = {
-        'boss_hp': 10, 
-        'player_hp': 10, 
+        'boss_hp': 15, 
+        'player_hp': 15, 
         'boss_name': 'Clover',
         }
     if items['key'] == '*Primal Command*':
@@ -175,7 +175,7 @@ def boss_turn(items):
 def player_attack_shout(items):
     lst = [
         f"{items['player_name']} bolts toward {items['boss_name']}, shouting {items['key']}!, as he rams {items['boss_name']} with a punishing strike.",
-        f"With outstretched arms and palms aimed at {items['boss_name']}, {items['player_name']} shouts {items['key']}! and hammers {items['boss_name']} with a powerful blow."
+        f"With outstretched arms and palms aimed at {items['boss_name']}, {items['player_name']} shouts {items['key']}! and hammers {items['boss_name']} with a powerful blow.",
         f"Shouting {items['key']}!, {items['player_name']} releases a mighy force that smashes {items['boss_name']}."
         ]
     time_print(random.choice(lst))
@@ -318,10 +318,15 @@ def get_location(items):
     lst = [
         f"What do you wan't to do {items['player_name']}?",
         "(1) Traverse the wooded mountain to the east.",
+        "(2) Hike the snow covered mountain to the west."
         ]
     time_print_loop(lst)
-    number = input("(2) Hike the snow covered mountain to the west.\n")
+    number = input("(3) Check bag.\n")
     return number
+
+def check_bag(items):
+    time_print(f"You have {items['key']} in you bag.\n")
+    town(items)
 
 #<----- Story Flow ----->
 
@@ -331,6 +336,8 @@ def town(items):
         clover(items)
     elif choice == '2':
         elijah(items)
+    elif choice == '3':
+        check_bag(items)
     else:
         town(items)
 
@@ -627,7 +634,7 @@ def elijah(items):
 
 def play():
     items = {
-    'key':'', 
+    'key':'*Some old map*', 
     'player_name':''
     }
     title()
