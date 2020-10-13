@@ -135,11 +135,19 @@ def clover_attacks(items):
         ]
     time_print_loop(lst)
 
+def elijah_attack_shout(items):
+    lst = [
+        f"{items['boss_name']} shouts *Banishing Light*! as a massive beam of light stricks you from the sky.",
+        f"Dark clouds start to break as {items['boss_name']} shouts *Banishing Light*! and a column of light blast you from above.",
+        f"{items['boss_name']} chops his hand downward and shouts *Banishing Light*! as pillar of light collides with you."
+        ]
+    time_print(random.choice(lst))
+
 def elijah_attacks(items):
     dmg = die_roll() * 2 
     items['player_hp'] -= dmg
+    elijah_attack_shout(items)
     lst = [
-        f"{items['boss_name']} shouts *Banishing Light*! as a massive beam of light stricks you from the sky.",
         "",
         f"{items['boss_name']} hits you for {dmg} damage.", 
         f"your health is now at {items['player_hp']}",
@@ -164,10 +172,11 @@ def boss_turn(items):
         
 #<-------------------------------- Player Functions -------------------------------->
 
-def attack_shout():
+def attack_shout(items):
     lst = [
         f"{items['player_name']} bolts toward {items['boss_name']}, shouting {items['key']}!, as he blast {items['boss_name']} with a punishing strike.",
-        
+        f"With outstretched arms and palms aimed at {items['boss_name']}, {items['player_name']} shouts {items['key']}! and hammers {items['boss_name']} with a powerful blow."
+        f"Shouting {items['key']}!, {items['player_name']} releases a mighy force that smashes {items['boss_name']}."
         ]
 
 def player_attack(items):
@@ -203,7 +212,25 @@ def player_turn(items):
         pick_who_attacks(items)
     else:
         time_print('You have Won!')
-        play_again()
+        if items['boss_name'] == 'Elijah':
+            lst = [
+                "Keeping your promise to Clover, you made the world safe from Elijah and his menacing.",
+                "A new journey is in front of you.",
+                f"Good people might need your assistance and the power of {items['key']}.",
+                "You leave the narrow valley, never to return."
+                ]
+            time_print_loop(lst)
+            play_again()
+        elif items['boss_name'] == 'Clover':
+            lst = [
+                "You have completed the task given to you by Elijah and dispatched Clover.",
+                "Attainment of *Primal Command* doubles your power and desire for more.",
+                "You return to Elijah and plot with him to find more prey.",
+                "You two leave the narrow valley, never to return."
+                ]
+            time_print_loop(lst)
+            play_again()
+        
         
 #<----- Fight ----->
 
