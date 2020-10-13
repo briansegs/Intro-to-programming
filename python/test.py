@@ -96,25 +96,38 @@ def pick_who_attacks(items):
 #<-------------------------------- Boss Functions -------------------------------->
 
 def dont_run(items):
-    time_print(f'''({items['player_name']}) "I will not give up!"\n''')
+    lst = [
+        "I will not give up!",
+        "I'm not done yet!",
+        "That won't stop me",
+        "I can do this!",
+        "I'm not afraid!"
+        ]
+    time_print(f'''({items['player_name']}) "{random.choice(lst)}"\n''')
     pick_who_attacks(items)
 
 def run(items):
     lst = [
-        f'''({items['player_name']}) "Im in over my head."''',
-        "", 
-        f"{items['player_name']} runs from the battle and escapes {items['boss_name']}.", 
+        f"{items['player_name']} runs from {items['boss_name']}.", 
         "You live to fight another day and return to town.",
         ""
         ]
     time_print_loop(lst)
     town(items)
 
+def clover_attack_shout(items):
+    lst = [
+        f"{items['boss_name']} thrust her hands out tward you and shouts *Primal Command*!, as a torrent of earth, hail, and flames crash into you.",
+        f"{items['boss_name']} shouts *Primal Command*! as a mass of stones, embers, and icy shards tornado around you, stricking you from every side.",
+        f"{items['boss_name']} shouts *Primal Command*! and blast you with a tempest infused with firey ash, molten rock, and blistering steam."   
+        ]
+    time_print(random.choice(lst))
+
 def clover_attacks(items):
     dmg = die_roll() + die_roll() 
     items['player_hp'] -= dmg
+    clover_attack_shout(items)
     lst = [
-        f"{items['boss_name']} thrust her hands out tward you, shouting *Primal Command*!, as a torrent of all 5 elements crash into you.",
         "",
         f"{items['boss_name']} hits you for {dmg} damage.", 
         f"your health is now at {items['player_hp']}",
@@ -151,6 +164,12 @@ def boss_turn(items):
         
 #<-------------------------------- Player Functions -------------------------------->
 
+def attack_shout():
+    lst = [
+        f"{items['player_name']} bolts toward {items['boss_name']}, shouting {items['key']}!, as he blast {items['boss_name']} with a punishing strike.",
+        
+        ]
+
 def player_attack(items):
     if items['boss_name'] == 'Clover':
         dmg = die_roll() * 2
@@ -168,7 +187,14 @@ def player_attack(items):
     contine_on()
 
 def boss_taunt(items):
-    time_print(f'''({items['boss_name']}) "Not bad!"\n''')
+    taunts = [
+        "Not bad!",
+        "Just a scratch!",
+        "You're going to pay for that!",
+        "That made me angry!",
+        "That won't happen again!"
+        ]
+    time_print(f'''({items['boss_name']}) "{random.choice(taunts)}"\n''')
 
 def player_turn(items):
     player_attack(items)
@@ -346,6 +372,11 @@ def clover_fight(items):
     lst = [
         "Clover, brown-haired and slender, with bright, dark eyes, comes out to greet you.",
         f"She notices {items['key']} in your possession and understands why you have come.",
+        ""
+        ]
+    time_print_loop(lst)
+    contine_on()
+    lst = [
         '''(Clover) "I will not be intimidated by one of Elijah's thugs!"''', 
         "Clover twirls her hands in the air, forming a bright green aura around herself.",
         ""
@@ -366,9 +397,11 @@ def clover_training(items):
     contine_on()           
     lst = [
         "To conclude your final day of training, Clover requests that you meet her infront of her house.",
-        f'''(Clover) "{items['player_name']}, everything that you have endured was to prepare you for this."'''
+        f'''(Clover) "{items['player_name']}, everything that you have endured was to prepare you for this."''',
+        ""
         ]
     time_print_loop(lst)
+    contine_on()
     print_primal_command()
     lst = [
         '''(Clover) "*Primal Command* is my greatest weapon and now it is yours."''',
@@ -442,14 +475,15 @@ def print_banishing_light():
         "         ( ",    
         "   )    )\(   . ",
         "  (( `.((_))  )) ",
-        "  ,\`.'    `-',' ",
+        "( ),\`.'    `-',' ",
         " `.)    /\    (,') ",
         " ,',   (  )   '._,) ",
         "((  )   ''   (`--' ",
         " `'( ) _--_,-.\ ' ",
         "  ' /,' \( )) `') ",
         "    (    `\( ",
-        "           ) "
+        "           ) ",
+        ""
         ]
     time_print_img(lst)
 def elijah_offer(items):
@@ -484,6 +518,11 @@ def elijah_fight(items):
     lst = [
         "Elijah, tall with powerful shoulders, and fierce blue eyes, comes out to greets you.",
         f"He smiles at you and begins to glow bright red as he notices you possess {items['key']}.",
+        ""
+        ]
+    time_print_loop(lst)
+    contine_on()
+    lst = [
         f'''(Elijah) "I crave the power of {items['key']} and i will crush you to obtain it!"''', 
         "Elijah gets into a fighting stance.",
         ""
@@ -505,8 +544,10 @@ def elijah_training(items):
     lst = [    
         "To conclude your final day of training, Elijah requests that you meet him infront of his house.",
         f'''(Elijah) "{items['player_name']}, everything that you have encountered has prepare you for this."''',
+        ""
         ]
     time_print_loop(lst)
+    contine_on()
     print_banishing_light()
     lst = [
         '''(Elijah) "*Banishing Light* is my greatest technique and now it is yours."''',
