@@ -99,7 +99,7 @@ def dont_run(items):
     lst = [
         "I will not give up!",
         "I'm not done yet!",
-        "That won't stop me",
+        "That won't stop me!",
         "I can do this!",
         "I'm not afraid!"
         ]
@@ -139,7 +139,7 @@ def elijah_attack_shout(items):
     lst = [
         f"{items['boss_name']} shouts *Banishing Light*! as a massive beam of light stricks you from the sky.",
         f"Dark clouds start to break as {items['boss_name']} shouts *Banishing Light*! and a column of light blast you from above.",
-        f"{items['boss_name']} chops his hand downward and shouts *Banishing Light*! as pillar of light collides with you."
+        f"{items['boss_name']} chops his hand downward and shouts *Banishing Light*! as a pillar of light collides with you."
         ]
     time_print(random.choice(lst))
 
@@ -174,7 +174,7 @@ def boss_turn(items):
 
 def player_attack_shout(items):
     lst = [
-        f"{items['player_name']} bolts toward {items['boss_name']}, shouting {items['key']}!, as he blasted {items['boss_name']} with a punishing strike.",
+        f"{items['player_name']} bolts toward {items['boss_name']}, shouting {items['key']}!, as he rams {items['boss_name']} with a punishing strike.",
         f"With outstretched arms and palms aimed at {items['boss_name']}, {items['player_name']} shouts {items['key']}! and hammers {items['boss_name']} with a powerful blow."
         f"Shouting {items['key']}!, {items['player_name']} releases a mighy force that smashes {items['boss_name']}."
         ]
