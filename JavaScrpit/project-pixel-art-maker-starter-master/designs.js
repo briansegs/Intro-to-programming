@@ -20,7 +20,9 @@ for (let i = 0; i < r; i++) {
     for (let y = 0; y < c; y++) {
         const td = tr.appendChild(document.createElement('td'));
         td.addEventListener('click', function () {
-            console.log('Click!')
+            console.log('Click!');
+            let color = document.getElementById("colorPicker").value;
+            td.setAttribute('style', "background : " + color);
         });
     }
 }
