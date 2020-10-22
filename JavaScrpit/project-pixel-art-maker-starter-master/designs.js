@@ -27,6 +27,6 @@ document.addEventListener('submit', function (event) {
 });
 
 
-makeGrid(10, 10);
+makeGrid(20, 20);
 
 

@@ -1,15 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans');
+
 body {
     text-align: center;
+    background-image: linear-gradient(#34434b,#14191c);
+    font-family: 'Open Sans';
+}
+
+#overlay {
+    width: 60%;
+    height: 950px;
+	margin: 0 auto;
+	background-color: #f7f7f7;
+	border-radius: 5px;
+    padding-bottom: 10px;
+    color: #eb0f0f;
 }
 
 h1 {
-    font-family: Monoton;
-    font-size: 70px;
+    font-family: VT323;
+    font-size: 90px;
     margin: 0.2em;
+    color: #b60d0d;
 }
 
 h2 {
     margin: 1em 0 0.25em;
+    color: #2C424D;
 }
 
 h2:first-of-type {
