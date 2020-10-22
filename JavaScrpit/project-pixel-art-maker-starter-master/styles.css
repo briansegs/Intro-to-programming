@@ -1,20 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
 
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+  }
+
 body {
     text-align: center;
     background-image: linear-gradient(#34434b,#14191c);
+    background-repeat: no-repeat;
     font-family: 'Open Sans';
+    height: 100vh;
+    width: 100vw;
+}
+
+#back-image {
+    max-width: 845px;
+    /* width: 75%; */
+    height: 100%;
+    margin: auto;
+    background-color: #b10e0e;
 }
 
 #overlay {
-    width: 60%;
-    height: 950px;
-	margin: 0 auto;
+    min-width: 522px;
+    width: 50%;
+    height: 100%;
+	margin: auto;
 	background-color: #f7f7f7;
-	border-radius: 5px;
-    padding-bottom: 10px;
     color: #eb0f0f;
+    padding: 10px;
 }
 
 h1 {
@@ -44,7 +64,7 @@ table {
     margin: 0 auto;
 }
 
-tr {
+tr{
     height: 20px;
 }
 
@@ -54,4 +74,5 @@ td {
 
 input[type=number] {
     width: 6em;
+    margin: 1px;
 }
