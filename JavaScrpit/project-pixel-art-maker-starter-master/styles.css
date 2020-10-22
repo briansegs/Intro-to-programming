@@ -21,10 +21,9 @@ body {
 
 #back-image {
     max-width: 845px;
-    /* width: 75%; */
     height: 100%;
     margin: auto;
-    background-color: #b10e0e;
+    background-image: url("output-paint1.png");
 }
 
 #overlay {
@@ -33,7 +32,7 @@ body {
     height: 100%;
 	margin: auto;
 	background-color: #f7f7f7;
-    color: #eb0f0f;
+    color: #d34e4e;
     padding: 10px;
 }
 
@@ -41,7 +40,7 @@ h1 {
     font-family: VT323;
     font-size: 90px;
     margin: 0.2em;
-    color: #b60d0d;
+    color: #33a2b9;
 }
 
 h2 {
